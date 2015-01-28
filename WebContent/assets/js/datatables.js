@@ -1,5 +1,5 @@
 $(document).ready(function() {	
-	var rootUrl = "/java-pi/api/product/";
+	var rootUrl = "/restlr/api/product/";
 	var entityName = "Product";
 	
 	var defaults = {
