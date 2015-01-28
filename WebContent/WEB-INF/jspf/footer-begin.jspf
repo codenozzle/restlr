@@ -1,0 +1,60 @@
+			</div>
+		</div>
+	</section>
+	<div id="footer_space"></div>
+</div>
+
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                &copy; 2015 CodeNozzle
+            </div>
+            <div class="col-sm-8">
+            
+            </div>
+            <div class="col-sm-1 text-right">
+                <small class="text-muted">v1.0</small>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--[[ common plugins ]]-->
+	
+<script src="template/js/jquery.min.js"></script>
+<script src="template/bootstrap/js/bootstrap.min.js"></script>
+<script src="template/js/jquery.ba-resize.min.js"></script>
+<script src="template/js/jquery_cookie.min.js"></script>
+<script src="template/js/retina.min.js"></script>
+<script src="template/js/lib/typeahead.js/typeahead.min.js"></script>
+<script src="template/js/lib/typeahead.js/hogan-2.0.0.js"></script>
+<script src="template/js/tinynav.js"></script>
+<script src="template/js/lib/jQuery-slimScroll/jquery.slimscroll.min.js"></script>
+<script src="template/js/lib/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<script src="template/js/lib/TouchSwipe/jquery.touchSwipe.min.js"></script>
+<script src="template/js/lib/navgoco/jquery.navgoco.min.js"></script>
+<script src="template/js/ebro_common.js"></script>
+
+<!--[[ page specific plugins ]]-->
+<script src="template/js/lib/dataTables/media/js/jquery.dataTables.min.js"></script>
+<script src="template/js/lib/dataTables/extras/ColReorder/media/js/ColReorder.min.js"></script>
+<script src="template/js/lib/dataTables/extras/FixedColumns/media/js/FixedColumns.min.js"></script>
+<script src="template/js/lib/dataTables/extras/ColVis/media/js/ColVis.min.js"></script>
+<script src="template/js/lib/dataTables/extras/TableTools/media/js/TableTools.min.js"></script>
+<script src="template/js/lib/dataTables/extras/TableTools/media/js/ZeroClipboard.js"></script>
+<script src="template/js/lib/dataTables/media/DT_bootstrap.js"></script>
+		
+<!--[if lte IE 9]>
+	<script src="template/js/ie/jquery.placeholder.js"></script>
+	<script>
+		$(function() {
+			$('input, textarea').placeholder();
+		});
+	</script>
+<![endif]-->
+
+<script src="assets/js/bootbox.min.js"></script>
+<script src="assets/js/sticky.js"></script>
+<script src="assets/js/ebro_notifications.js"></script>
+<script src="assets/js/datatables.js"></script>

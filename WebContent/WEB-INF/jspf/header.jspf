@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title><%=pageTitle%> : CodeNozzle Admin</title>
+		
+		<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<link rel="shortcut icon" type="image/x-icon" href="template/favicon.ico">
+		
+		<link rel="stylesheet" href="template/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="template/css/todc-bootstrap.min.css">      
+		<link rel="stylesheet" href="template/css/font-awesome/css/font-awesome.min.css">     
+		<link rel="stylesheet" href="template/img/flags/flags.css">
+		<link rel="stylesheet" href="template/css/retina.css">
+		<link rel="stylesheet" href="template/js/lib/bootstrap-switch/stylesheets/bootstrap-switch.css">
+		<link rel="stylesheet" href="template/js/lib/bootstrap-switch/stylesheets/ebro_bootstrapSwitch.css">
+		
+		<link rel="stylesheet" href="template/js/lib/dataTables/media/DT_bootstrap.css">
+		<link rel="stylesheet" href="template/js/lib/dataTables/extras/TableTools/media/css/TableTools.css">
+		<link rel="stylesheet" href="template/js/lib/Sticky/sticky.css">
+		
+		<link rel="stylesheet" href="template/css/style.css">
+		<link rel="stylesheet" href="template/css/theme/color_1.css" id="theme">
+		
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="template/css/ie.css">
+		<script src="template/js/ie/html5shiv.js"></script>
+		<script src="template/js/ie/respond.min.js"></script>
+		<script src="template/js/ie/excanvas.min.js"></script>
+	<![endif]-->
+
+	<!-- custom fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Roboto:300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+			
+	</head>
+	<body class=" sidebar_hidden side_fixed">
+		<div id="wrapper_all">
+			<header id="top_header">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-6 col-sm-2">
+							<a href="index.jsp" class="logo_main" title="CodeNozzle Admin"><img src="template/img/logo_main.png" alt=""></a>
+						</div>
+					</div>
+				</div>
+			</header>						
+			<nav id="top_navigation">
+				<div class="container">
+					<ul id="icon_nav_h" class="top_ico_nav clearfix">
+						<li <%= (pageName == "dashboard") ? " class=\"active\"" : "" %>>
+							<a href="index.jsp">
+								<i class="icon-home icon-2x"></i>
+								<span class="menu_label">Dashboard</span>
+							</a>
+						</li>
+						<li<%= (pageName == "orders") ? " class=\"active\"" : "" %>>             
+							<a href="orders.jsp">
+								<span class="label label-success">15</span>
+								<i class="icon-tags icon-2x"></i>
+								<span class="menu_label">Orders</span>
+							</a>
+						</li>
+						<li<%= (pageName == "reports") ? " class=\"active\"" : "" %>>             
+							<a href="reports.jsp">
+								<i class="icon-bar-chart icon-2x"></i>
+								<span class="menu_label">Reports</span>
+							</a>
+						</li>
+						<li<%= (pageName == "products") ? " class=\"active\"" : "" %>>             
+							<a href="products.jsp">
+								<i class="icon-edit icon-2x"></i>
+								<span class="menu_label">Products</span>
+							</a>
+						</li>
+						<li<%= (pageName == "users") ? " class=\"active\"" : "" %>>             
+							<a href="users.jsp">
+								<i class="icon-group icon-2x"></i>
+								<span class="menu_label">Users</span>
+							</a>
+						</li>												
+						<li<%= (pageName == "settings") ? " class=\"active\"" : "" %>>             
+							<a href="settings.jsp">
+								<i class="icon-wrench icon-2x"></i>
+								<span class="menu_label">Settings</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- mobile navigation -->
+			<nav id="mobile_navigation"></nav>
+			
+			<section id="breadcrumbs">
+				<div class="container">
+					<ul>
+						<li><a href="index.jsp">Dashboard</a></li>
+						<li><span><%=pageTitle%></span></li>						
+					</ul>
+				</div>
+			</section>
+			<section class="container clearfix main_section">
+				<div id="main_content_outer" class="clearfix">
+					<div id="main_content">
