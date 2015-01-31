@@ -10,12 +10,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.codenozzle.db.AppStorage;
 import com.codenozzle.db.OrderStorage;
 import com.codenozzle.model.Order;
 
 @Path("order")
+@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class OrderResource extends EntityResource<Order> {
     
 	@Override
@@ -24,16 +27,14 @@ public class OrderResource extends EntityResource<Order> {
 	}
 	
     @POST
-    @Produces(MediaType.TEXT_HTML)
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void create(
+    public Response create(
     	@FormParam("userId") Integer userId,
         @FormParam("shippingAddressId") Integer shippingAddressId,
         @FormParam("billingAddressId") Integer billingAddressId,
         @Context HttpServletResponse servletResponse) throws IOException {
     	
     	getStorage().store(new Order(userId, shippingAddressId, billingAddressId));
-    	servletResponse.sendRedirect("../../order.jsp");
+    	return Response.ok().build();
     }
     
 }

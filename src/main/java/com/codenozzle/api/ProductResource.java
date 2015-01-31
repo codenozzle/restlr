@@ -18,6 +18,8 @@ import com.codenozzle.db.ProductStorage;
 import com.codenozzle.model.Product;
 
 @Path("product")
+@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class ProductResource extends EntityResource<Product> {
     
 	@Override
@@ -26,8 +28,6 @@ public class ProductResource extends EntityResource<Product> {
 	}
 	
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes({MediaType.APPLICATION_FORM_URLENCODED, MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON})
     public Response create(
     	@FormParam("productSku") String productSku,
         @FormParam("productName") String productName,
@@ -40,8 +40,8 @@ public class ProductResource extends EntityResource<Product> {
     	
     	getStorage().store(new Product(productSku, productName, description, price, active));
     	//servletResponse.sendRedirect("../../order.jsp");
-    	return Response.ok("schweet!", MediaType.APPLICATION_JSON_TYPE).build();
-    	//return Response.ok().build();
+    	//return Response.ok("schweet!", MediaType.APPLICATION_JSON_TYPE).build();
+    	return Response.ok().build();
     	//return Response.status(200).entity("sucessfully added").build();
     }
     

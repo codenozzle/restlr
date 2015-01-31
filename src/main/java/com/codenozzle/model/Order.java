@@ -6,7 +6,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Order extends Entity {
-
+	
+	private static final long serialVersionUID = -245124497967270964L;
+	
 	private Integer userId;
 	private Integer shippingAddressId;
 	private Integer billingAddressId;

@@ -10,12 +10,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.codenozzle.db.AppStorage;
 import com.codenozzle.db.UserStorage;
 import com.codenozzle.model.User;
 
 @Path("user")
+@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class UserResource extends EntityResource<User> {
 	
 	@Override
@@ -24,9 +27,7 @@ public class UserResource extends EntityResource<User> {
 	}
     
     @POST
-    @Produces(MediaType.TEXT_HTML)
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void create(
+    public Response create(
     	@FormParam("firstName") String firstName,
         @FormParam("lastName") String lastName,
         @FormParam("emailAddress") String emailAddress,
@@ -34,8 +35,7 @@ public class UserResource extends EntityResource<User> {
         @Context HttpServletResponse servletResponse) throws IOException {
     	
     	getStorage().store(new User(firstName, lastName, emailAddress, active));
-    	servletResponse.sendRedirect("../../users.jsp");
-      
+    	return Response.ok().build();
     }
     
 }

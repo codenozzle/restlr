@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Product extends Entity  {
 
+	private static final long serialVersionUID = -8200503315550831684L;
+	
 	private String productSku;
 	private String productName;
 	private String description;

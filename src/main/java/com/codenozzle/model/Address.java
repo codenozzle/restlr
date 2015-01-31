@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Address extends Entity {
 
+	private static final long serialVersionUID = -3467994633316920149L;
+	
 	private String address1;
 	private String address2;
 	private String city;

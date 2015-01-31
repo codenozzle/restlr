@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class User extends Entity {
 
+	private static final long serialVersionUID = 7611899059740125965L;
+	
 	private String firstName;
 	private String lastName;
 	private String emailAddress;
