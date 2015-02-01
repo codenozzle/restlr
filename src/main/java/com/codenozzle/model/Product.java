@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Product extends Entity  {
+public class Product extends Entity {
 
 	private static final long serialVersionUID = -8200503315550831684L;
 	
@@ -13,13 +13,13 @@ public class Product extends Entity  {
 	private String productName;
 	private String description;
 	private BigDecimal price;
-	private boolean active;
+	private Boolean active;
 	
 	public Product() {
 		
 	}
 	
-	public Product(String productSku, String productName, String description, BigDecimal price, boolean active) {
+	public Product(String productSku, String productName, String description, BigDecimal price, Boolean active) {
 		this.productSku = productSku;
 		this.productName = productName;
 		this.description = description;
@@ -59,11 +59,11 @@ public class Product extends Entity  {
 		this.price = price;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 

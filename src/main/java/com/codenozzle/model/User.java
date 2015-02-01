@@ -10,13 +10,13 @@ public class User extends Entity {
 	private String firstName;
 	private String lastName;
 	private String emailAddress;
-	private boolean active;
+	private Boolean active;
 	
 	public User() {
 		
 	}
 	
-	public User(String firstName, String lastName, String emailAddress, boolean active) {
+	public User(String firstName, String lastName, String emailAddress, Boolean active) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailAddress = emailAddress;
@@ -47,11 +47,11 @@ public class User extends Entity {
 		this.emailAddress = emailAddress;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 
