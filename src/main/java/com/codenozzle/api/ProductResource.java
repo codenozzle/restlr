@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -28,21 +30,53 @@ public class ProductResource extends EntityResource<Product> {
 	}
 	
     @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response create(
     	@FormParam("productSku") String productSku,
         @FormParam("productName") String productName,
         @FormParam("description") String description,
         @FormParam("price") BigDecimal price,
-        @FormParam("active") boolean active,
+        @FormParam("active") Boolean active,
         @Context HttpServletResponse servletResponse) throws IOException {
     	
-    	//return storeAndReturn(servletResponse, new Product(productSku, productName, description, price, active));
-    	
     	getStorage().store(new Product(productSku, productName, description, price, active));
-    	//servletResponse.sendRedirect("../../order.jsp");
     	//return Response.ok("schweet!", MediaType.APPLICATION_JSON_TYPE).build();
     	return Response.ok().build();
-    	//return Response.status(200).entity("sucessfully added").build();
+    }
+    
+    @PUT
+    @Path("{id: \\d+}")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response update(
+    	@PathParam("id") final int id,
+    	@FormParam("productSku") String productSku,
+        @FormParam("productName") String productName,
+        @FormParam("description") String description,
+        @FormParam("price") BigDecimal price,
+        @FormParam("active") Boolean active,
+        @Context HttpServletResponse servletResponse) throws IOException {
+    	
+    	Product resource = getStorage().get(id);
+    	if (resource != null) {
+    		if (productSku != null) {
+        		resource.setProductSku(productSku);
+        	}
+        	if (productName != null) {
+        		resource.setProductName(productName);
+        	}
+        	if (description != null) {
+        		resource.setDescription(description);
+        	}
+        	if (price != null) {
+        		resource.setPrice(price);
+        	}
+        	if (active != null) {
+        		resource.setActive(active);
+        	}
+        	getStorage().store(resource);
+    	}
+    	
+    	return Response.ok().build();
     }
     
 }
