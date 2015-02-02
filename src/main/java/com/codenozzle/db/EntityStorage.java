@@ -21,7 +21,7 @@ public abstract class EntityStorage<T extends Entity> {
         return storage.put(entity.getId(), entity);
     }
 
-    public T get(final int id) {
+    public T get(Integer id) {
         return storage.get(id);
     }
 
@@ -33,7 +33,7 @@ public abstract class EntityStorage<T extends Entity> {
         return storage;
     }
 
-    public T remove(final int id) {
+    public T remove(Integer id) {
         return storage.remove(id);
     }
     

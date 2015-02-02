@@ -1,18 +1,24 @@
 package com.codenozzle.api;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import jersey.repackaged.com.google.common.base.Predicate;
+import jersey.repackaged.com.google.common.collect.Maps;
 
 import com.codenozzle.db.AddressStorage;
 import com.codenozzle.db.AppStorage;
@@ -45,7 +51,7 @@ public class AddressResource extends EntityResource<Address> {
     @Path("{id: \\d+}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response update(
-    	@PathParam("id") final int id,
+    	@PathParam("id") Integer id,
     	@FormParam("address1") String address1,
         @FormParam("address2") String address2,
         @FormParam("city") String city,
@@ -74,6 +80,44 @@ public class AddressResource extends EntityResource<Address> {
     	}
     	
     	return Response.ok().build();
+    }
+    
+    @GET
+    @Path("/search")
+    public Collection<Address> search(
+		@QueryParam("id") Integer id,
+		@QueryParam("address1") String address1,
+		@QueryParam("address2") String address2,
+		@QueryParam("city") String city,
+		@QueryParam("state") String state,
+		@QueryParam("zip") String zip,
+        @Context HttpServletResponse servletResponse) throws IOException {
+    	
+    	Predicate<Address> filters = new Predicate<Address>() {
+    	    public boolean apply(Address address) {
+    	    	if (paramCompare(id, address.getId())) {
+            		return true;
+            	}
+    	    	if (paramCompare(address1, address.getAddress1())) {
+            		return true;
+            	}
+            	if (paramCompare(address2, address.getAddress2())) {
+            		return true;
+            	}
+            	if (paramCompare(city, address.getCity())) {
+            		return true;
+            	}
+            	if (paramCompare(state, address.getState())) {
+            		return true;
+            	}
+            	if (paramCompare(zip, address.getZip())) {
+            		return true;
+            	}
+    	        return false;
+    	    }
+    	};
+    	
+    	return Maps.filterValues(getStorage().getAll(), filters).values();
     }
     
 }

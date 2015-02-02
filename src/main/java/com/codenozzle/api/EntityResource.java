@@ -42,5 +42,12 @@ public abstract class EntityResource<T extends Entity> {
 	protected Response storeAndReturn(HttpServletResponse servletResponse, T entity) throws IOException {
 		return Response.ok(getStorage().store(entity)).build();
 	}
+	
+	protected boolean paramCompare(Object object1, Object object2) {
+		if (object1 == null || object2 == null) {
+			return false;
+		}
+		return object1.equals(object2);
+	}
 
 }

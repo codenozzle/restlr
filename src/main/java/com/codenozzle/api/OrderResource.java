@@ -43,7 +43,7 @@ public class OrderResource extends EntityResource<Order> {
     @Path("{id: \\d+}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response update(
-    	@PathParam("id") final int id,
+    	@PathParam("id") Integer id,
     	@FormParam("userId") Integer userId,
         @FormParam("shippingAddressId") Integer shippingAddressId,
         @FormParam("billingAddressId") Integer billingAddressId,

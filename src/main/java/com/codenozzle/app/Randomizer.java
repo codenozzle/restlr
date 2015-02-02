@@ -26,7 +26,7 @@ public class Randomizer {
 		loadSampleOrders();
 	}
 	
-	public void reLoadSampleData() {
+	public void reloadSampleData() {
 		removeSampleData();
 		loadSampleData();
 	}
