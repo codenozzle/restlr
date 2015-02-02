@@ -22,18 +22,18 @@ public abstract class EntityResource<T extends Entity> {
 	
 	@GET
     @Path("{id: \\d+}")
-    public T get(@PathParam("id") final int id) {
+    public T get(@PathParam("id") Integer id) {
         return getStorage().get(id);
     }
 
     @DELETE
     @Path("{id: \\d+}")
-    public T remove(@PathParam("id") final int id) {
+    public T remove(@PathParam("id") Integer id) {
         return getStorage().remove(id);
     }
 
     @DELETE
-    public int removeAll() {
+    public Integer removeAll() {
     	return getStorage().removeAll();
     }
 

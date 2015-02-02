@@ -50,7 +50,7 @@ public class UserResource extends EntityResource<User> {
     @Path("{id: \\d+}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response update(
-    	@PathParam("id") final int id,
+    	@PathParam("id") Integer id,
     	@FormParam("firstName") String firstName,
         @FormParam("lastName") String lastName,
         @FormParam("emailAddress") String emailAddress,
