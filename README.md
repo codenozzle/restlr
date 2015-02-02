@@ -1,7 +1,7 @@
 # restlr
 A RESTful API in Java using Jersey
 
-### cUrl Examples
+### CRUDS via cUrl Examples
 || Gets all resources
 | ----------- | ----------- |
 | GET | curl -H "Accept: application/json" http://localhost:8080/restlr/api/product/ |
