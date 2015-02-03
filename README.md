@@ -1,7 +1,11 @@
 # restlr
 A RESTful API in Java using Jersey
 
-### CRUDS via cUrl Examples
+### App and UI
+- The link below will take you to a UI based on a Bootstrap 3 theme. The UI interactions and ajax operations are from jQuery. Please note that the application is a work in progress and isn't fully functional yet.
+  - App Link: [http://localhost:8080/restlr/products.jsp](http://localhost:8080/restlr/products.jsp)
+
+### Using cUrl to perform CRUDS operations against the API
 || Gets all resources
 | ----------- | ----------- |
 | GET | curl -H "Accept: application/json" http://localhost:8080/restlr/api/product/ |
