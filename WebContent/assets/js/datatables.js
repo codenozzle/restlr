@@ -3,23 +3,26 @@ $(document).ready(function() {
 	var entityName = "Product";
 	
 	var defaults = {
-        position: 'top-right',
-        speed: 'fast',
+        position: "top-right",
+        speed: "fast",
         allowdupes: true,
         autoclose: 1000,
-        classList: ''
+        classList: ""
     };
 	
 	$('#dt_basic2').dataTable({
-        "ajax": rootUrl,
-        "columns": [
-            { "data": "productSku" },
-            { "data": "productName" },
-            { "data": "description" },
-            { "data": "price" },
-            { "data": "active" }
-        ]
-    });
+	    "bServerSide": true,
+	    "sAjaxSource": rootUrl,
+	    "sAjaxDataProp" : "",
+	    "bProcessing": true,
+	    "aoColumns": [
+		     { "mData": 0 }, 
+		     { "mData": 1 },
+		     { "mData": 2 }, 
+		     { "mData": 3 }, 
+		     { "mData": 4 }
+	     ]
+	});
 	
 	$.getJSON(rootUrl, function(json) {
 		console.log(json);

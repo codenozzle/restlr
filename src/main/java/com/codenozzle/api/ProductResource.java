@@ -124,3 +124,4 @@ public class ProductResource extends EntityResource<Product> {
     }
     
 }
+
