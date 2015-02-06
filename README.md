@@ -1,6 +1,16 @@
 # restlr
 A RESTful API in Java using Jersey
 
+### Packages
+- src/main/java/com/codenozzle/app/
+  - Initializes RESTful service and loads test data 
+- src/main/java/com/codenozzle/db/
+  - Map-based object store to simulate a database
+- src/main/java/com/codenozzle/model/
+  - JAXB annotated POJOs used to marshall data into media formats
+- src/main/java/com/codenozzle/api/
+  - Defines paths, access, and media types for REST operations
+
 ### App and UI
 - The link below will take you to a UI based on a Bootstrap 3 theme. The UI interactions and ajax operations are from jQuery. Please note that the application is a work in progress and isn't fully functional yet.
   - App Link: [http://localhost:8080/restlr/products.jsp](http://localhost:8080/restlr/products.jsp)
