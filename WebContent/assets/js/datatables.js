@@ -1,115 +1,91 @@
-$(document).ready(function() {	
-	var rootUrl = "/restlr/api/product/";
-	var entityName = "Product";
-	
-	var defaults = {
+function UI(resourceUrl, columnMap, tableSelector, entityName) {
+	this.oTable;
+	this.resourceUrl = resourceUrl;
+	this.columnMap = columnMap;
+	this.tableSelector = tableSelector;
+	this.entityName = entityName;
+	this.defaults = {
         position: "top-right",
         speed: "fast",
         allowdupes: true,
-        autoclose: 1000,
+        autoclose: 500,
         classList: ""
     };
+}
+
+UI.prototype = {
+	init: UI,
 	
-	$('#dt_basic2').dataTable({
-	    "bServerSide": true,
-	    "sAjaxSource": rootUrl,
-	    "sAjaxDataProp" : "",
-	    "bProcessing": true,
-	    "aoColumns": [
-		     { "mData": 0 }, 
-		     { "mData": 1 },
-		     { "mData": 2 }, 
-		     { "mData": 3 }, 
-		     { "mData": 4 }
-	     ]
-	});
+	createTable: function () {
+		this.oTable = $(this.tableSelector).DataTable({
+			"bProcessing": false,
+			"sAjaxSource": this.resourceUrl,
+			"sAjaxDataProp": "",
+			"aoColumns": this.columnMap
+	    });
+		return this.oTable;
+	},
 	
-	$.getJSON(rootUrl, function(json) {
-		console.log(json);
-	});
-	
-	$("#cancel-button").click(function(){
-    	$("#create-form").hide();
+	resetUI: function () {
+		$("#create-form").hide();
     	$('#search-results').show();
     	$("#control-buttons").show();
+    	this.refresh();
+	},
+	
+	showCreate: function () {
+		$('#search-results').hide();
+    	$("#create-form").show();
+	},
+	
+	refresh: function () {
+		this.oTable.fnDraw(false);
+	},
+	
+	submitForm: function (resourceUrl) {
+		$("form").submit( function(event) {
+			event.preventDefault();
+	        $.ajax({
+	            type: "POST",
+	            url: resourceUrl,
+	            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+	            data: $("form").serialize(),
+	            success: function (data) {
+	            	console.log(data);
+	            	$.stickyNote("New record created", $.extend({}, this.defaults, { classList: "stickyNote-success" }));
+	            }
+	        });
+	    });
+	}
+}
+
+$(document).ready(function() {	
+	var columnMap = [
+	    { "mDataProp": "productSku" },
+	    { "mDataProp": "productName" },
+	    { "mDataProp": "description" },
+	    { "mDataProp": "price" },
+	    { "mDataProp": "active" }
+    ];
+	
+	var ui = new UI("/restlr/api/product/", columnMap, "#dt_basic2", "Product");
+	ui.createTable();
+	
+	$("#cancel-button").click(function(){
+		ui.resetUI();
     });
 
     $("#create-new-button").click(function(){
-    	$('#search-results').hide();
-    	$("#create-form").show();
+    	ui.showCreate();
     });
     
     $("#refresh-button").click(function(){
-    	console.log($('#dt_basic2').DataTable());
-    	$('#dt_basic2').DataTable().draw();
+    	ui.refresh();
     });
     
 	$("#submit-button").click( function() {
-		$("form").submit(function() {
-	        $.ajax({
-	            type: "POST",
-	            url: rootUrl,
-	            data: $("form").serialize(),
-	            success: function (data) { 
-	            	console.log(data);
-	            }
-	        });
-	        
-	        $.stickyNote(entityName + " creation success", $.extend({}, defaults, {classList: 'stickyNote-success'}))
-	        event.preventDefault();
-	    });
-	});
-	
-	$("#show-all").click( function() {
-		$.ajax({
-			type: 'GET',
-			url: rootURL,
-			dataType: "json", // data type of response
-			success: renderList
-		});
-	});
-	
-	$("#edit").click( function() {
-		$.ajax({
-	        type: 'GET',
-	        url: rootURL + '/' + id,
-	        dataType: "json",
-	        success: function(data){
-	            $('#btnDelete').show();
-	            renderDetails(data);
-	        }
-	    });
-	});	
-
-	$("#update").click( function() {
-		$.ajax({
-	        type: 'PUT',
-	        contentType: 'application/json',
-	        url: rootURL + '/' + $('#wineId').val(),
-	        dataType: "json",
-	        data: formToJSON(),
-	        success: function(data, textStatus, jqXHR){
-	            alert('Wine updated successfully');
-	        },
-	        error: function(jqXHR, textStatus, errorThrown){
-	            alert('updateWine error: ' + textStatus);
-	        }
-	    });
-	});
-	
-	$("#delete").click( function() {
-		console.log('deleteWine');
-	    $.ajax({
-	        type: 'DELETE',
-	        url: rootURL + '/' + $('#wineId').val(),
-	        success: function(data, textStatus, jqXHR){
-	            alert('Wine deleted successfully');
-	        },
-	        error: function(jqXHR, textStatus, errorThrown){
-	            alert('deleteWine error');
-	        }
-	    });
+		ui.submitForm("/restlr/api/product/");
+		ui.resetUI();
 	});
     
 });
-

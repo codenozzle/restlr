@@ -22,7 +22,7 @@
 				<h4 class="panel-title">Create</h4>
 			</div>
 			<div class="panel-body">
-				<form method="post" accept-charset="utf-8" id="create-form" enctype="application/x-www-form-urlencoded">
+				<form id="create-form">
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="form-group">
