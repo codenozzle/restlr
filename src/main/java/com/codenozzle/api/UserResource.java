@@ -35,6 +35,7 @@ public class UserResource extends EntityResource<User> {
 	}
     
     @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response create(
     	@FormParam("firstName") String firstName,
         @FormParam("lastName") String lastName,

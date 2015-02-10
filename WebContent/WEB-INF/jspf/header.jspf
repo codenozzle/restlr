@@ -53,6 +53,7 @@
 								<span class="menu_label">Dashboard</span>
 							</a>
 						</li>
+						<!-- 
 						<li<%= (pageName == "orders") ? " class=\"active\"" : "" %>>             
 							<a href="orders.jsp">
 								<span class="label label-success">15</span>
@@ -65,7 +66,7 @@
 								<i class="icon-bar-chart icon-2x"></i>
 								<span class="menu_label">Reports</span>
 							</a>
-						</li>
+						</li> -->
 						<li<%= (pageName == "products") ? " class=\"active\"" : "" %>>             
 							<a href="products.jsp">
 								<i class="icon-edit icon-2x"></i>
@@ -78,12 +79,14 @@
 								<span class="menu_label">Users</span>
 							</a>
 						</li>												
+						<!--
 						<li<%= (pageName == "settings") ? " class=\"active\"" : "" %>>             
 							<a href="settings.jsp">
 								<i class="icon-wrench icon-2x"></i>
 								<span class="menu_label">Settings</span>
 							</a>
 						</li>
+						-->
 					</ul>
 				</div>
 			</nav>

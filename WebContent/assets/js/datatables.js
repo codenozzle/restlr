@@ -1,91 +1,94 @@
-function UI(resourceUrl, columnMap, tableSelector, entityName) {
-	this.oTable;
-	this.resourceUrl = resourceUrl;
-	this.columnMap = columnMap;
-	this.tableSelector = tableSelector;
-	this.entityName = entityName;
-	this.defaults = {
-        position: "top-right",
-        speed: "fast",
-        allowdupes: true,
-        autoclose: 500,
-        classList: ""
-    };
-}
-
-UI.prototype = {
-	init: UI,
+var UI = (function () {
+	var instance;
 	
-	createTable: function () {
-		this.oTable = $(this.tableSelector).DataTable({
-			"bProcessing": false,
-			"sAjaxSource": this.resourceUrl,
-			"sAjaxDataProp": "",
-			"aoColumns": this.columnMap
+	function init(resourceUrl, columnMap, tableSelector) {
+		var resourceUrl = resourceUrl;
+		var columnMap = columnMap;
+		var tableSelector = tableSelector;
+		var oTable;
+		var stickyNoteDefaults = {
+	        position: "top-right",
+	        speed: "fast",
+	        allowdupes: true,
+	        autoclose: 800,
+	        classList: ""
+	    };
+		
+		$("#cancel-button").click(function() {
+			resetUI();
 	    });
-		return this.oTable;
-	},
-	
-	resetUI: function () {
-		$("#create-form").hide();
-    	$('#search-results').show();
-    	$("#control-buttons").show();
-    	this.refresh();
-	},
-	
-	showCreate: function () {
-		$('#search-results').hide();
-    	$("#create-form").show();
-	},
-	
-	refresh: function () {
-		this.oTable.fnDraw(false);
-	},
-	
-	submitForm: function (resourceUrl) {
-		$("form").submit( function(event) {
-			event.preventDefault();
-	        $.ajax({
-	            type: "POST",
-	            url: resourceUrl,
-	            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-	            data: $("form").serialize(),
-	            success: function (data) {
-	            	console.log(data);
-	            	$.stickyNote("New record created", $.extend({}, this.defaults, { classList: "stickyNote-success" }));
-	            }
-	        });
+
+	    $("#create-new-button").click(function() {
+	    	showCreate();
 	    });
-	}
-}
-
-$(document).ready(function() {	
-	var columnMap = [
-	    { "mDataProp": "productSku" },
-	    { "mDataProp": "productName" },
-	    { "mDataProp": "description" },
-	    { "mDataProp": "price" },
-	    { "mDataProp": "active" }
-    ];
-	
-	var ui = new UI("/restlr/api/product/", columnMap, "#dt_basic2", "Product");
-	ui.createTable();
-	
-	$("#cancel-button").click(function(){
-		ui.resetUI();
-    });
-
-    $("#create-new-button").click(function(){
-    	ui.showCreate();
-    });
-    
-    $("#refresh-button").click(function(){
-    	ui.refresh();
-    });
-    
-	$("#submit-button").click( function() {
-		ui.submitForm("/restlr/api/product/");
-		ui.resetUI();
-	});
-    
-});
+	    
+	    $("#refresh-button").click(function() {
+	    	refresh();
+	    });
+	    
+		$("#submit-button").click(function() {
+			submitForm();
+			refresh();
+			resetUI();
+		});
+		
+		function createTable() {
+			oTable = $(tableSelector).dataTable({
+				sAjaxSource: resourceUrl,
+				sAjaxDataProp: "",
+				aoColumns: columnMap
+		    });
+		}
+		
+		function resetUI() {
+			$("#create-form").hide();
+	    	$('#search-results').show();
+	    	$("#control-buttons").show();
+		}
+		
+		function showCreate() {
+			$('#search-results').hide();
+	    	$("#create-form").show();
+		}
+		
+		function refresh() {
+			oTable.fnReloadAjax();
+		}
+		
+		function createStickyNote() {
+			$.stickyNote("New record created", $.extend({}, stickyNoteDefaults, { classList: "stickyNote-success" }));
+		}
+		
+		function submitForm() {
+			$("form").submit( function(event) {
+				event.preventDefault();
+		        $.ajax({
+		            type: "POST",
+		            url: resourceUrl,
+		            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		            data: $("form").serialize(),
+		            success: function () {
+		            	createStickyNote();
+		            }
+		        });
+		    });
+		}
+ 
+	    return {
+	    	createTable: createTable,
+	    	resetUI: resetUI,
+	    	showCreate: showCreate,
+	    	refresh: refresh,
+	    	submitForm: submitForm
+    	};
+	};
+ 
+	return {
+		getInstance: function (resourceUrl, columnMap, tableSelector) {
+			if (!instance) {
+				instance = init(resourceUrl, columnMap, tableSelector);
+			}
+			return instance;
+		}
+	};
+})();

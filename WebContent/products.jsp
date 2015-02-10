@@ -90,4 +90,19 @@
 
 <%@include file="/WEB-INF/jspf/footer-begin.jspf" %>
 
+<script>
+$(document).ready(function() {	
+	var columnMap = [
+     	{ "mDataProp": "productSku" },
+     	{ "mDataProp": "productName" },
+     	{ "mDataProp": "description" },
+     	{ "mDataProp": "price" },
+     	{ "mDataProp": "active" }
+     ];
+
+    var ui = UI.getInstance("/restlr/api/product/", columnMap, "#dt_basic2");
+    ui.createTable();    
+});
+</script>
+
 <%@include file="/WEB-INF/jspf/footer-end.jspf" %>

@@ -44,6 +44,7 @@
 <script src="template/js/lib/dataTables/extras/TableTools/media/js/TableTools.min.js"></script>
 <script src="template/js/lib/dataTables/extras/TableTools/media/js/ZeroClipboard.js"></script>
 <script src="template/js/lib/dataTables/media/DT_bootstrap.js"></script>
+<script src="http://cdn.datatables.net/plug-ins/3cfcc339e89/api/fnReloadAjax.js"></script>
 		
 <!--[if lte IE 9]>
 	<script src="template/js/ie/jquery.placeholder.js"></script>
