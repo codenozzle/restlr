@@ -12,7 +12,7 @@ A RESTful API in Java using Jersey
   - Defines paths, access, and media types for REST operations
 
 ### App and UI
-- The link below will take you to a UI based on a Bootstrap 3 theme. The UI interactions and ajax operations are from jQuery. Please note that the application is a work in progress and isn't fully functional yet.
+- The link below will take you to a UI based on a Bootstrap 3 theme. The UI interactions and ajax operations are from jQuery. Please note that this application is a work in progress and some features might not be fully functional yet.
   - App Link: [http://localhost:8080/restlr/products.jsp](http://localhost:8080/restlr/products.jsp)
 
 ### Using cUrl to perform CRUDS operations against the API
