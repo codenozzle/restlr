@@ -39,7 +39,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-6 col-sm-2">
-							<a href="index.jsp" class="logo_main" title="CodeNozzle Admin"><img src="template/img/logo_main.png" alt=""></a>
+							<a href="index.jsp" class="logo_main" title="Restlr Admin"><img src="assets/images/restlr_logo.png" alt=""></a>
 						</div>
 					</div>
 				</div>
@@ -47,12 +47,14 @@
 			<nav id="top_navigation">
 				<div class="container">
 					<ul id="icon_nav_h" class="top_ico_nav clearfix">
+						<!-- 
 						<li <%= (pageName == "dashboard") ? " class=\"active\"" : "" %>>
 							<a href="index.jsp">
 								<i class="icon-home icon-2x"></i>
 								<span class="menu_label">Dashboard</span>
 							</a>
 						</li>
+						 -->
 						<!-- 
 						<li<%= (pageName == "orders") ? " class=\"active\"" : "" %>>             
 							<a href="orders.jsp">
@@ -87,6 +89,12 @@
 							</a>
 						</li>
 						-->
+						<li<%= (pageName == "testing-tool") ? " class=\"active\"" : "" %>>             
+							<a href="testing-tool.jsp">
+								<i class="icon-wrench icon-2x"></i>
+								<span class="menu_label">Testing Tool</span>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</nav>

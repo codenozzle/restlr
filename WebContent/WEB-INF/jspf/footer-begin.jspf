@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                &copy; 2015 CodeNozzle
+                &copy; 2015 Code Nozzle
             </div>
             <div class="col-sm-8">
             
@@ -45,6 +45,9 @@
 <script src="template/js/lib/dataTables/extras/TableTools/media/js/ZeroClipboard.js"></script>
 <script src="template/js/lib/dataTables/media/DT_bootstrap.js"></script>
 <script src="http://cdn.datatables.net/plug-ins/3cfcc339e89/api/fnReloadAjax.js"></script>
+
+<link href="assets/google-code-prettify/prettify.css" rel="stylesheet" type="text/css" />
+<script src="assets/google-code-prettify/prettify.js"  type="text/javascript"></script>
 		
 <!--[if lte IE 9]>
 	<script src="template/js/ie/jquery.placeholder.js"></script>
