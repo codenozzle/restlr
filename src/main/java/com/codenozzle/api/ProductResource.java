@@ -16,7 +16,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import jersey.repackaged.com.google.common.base.Predicate;
 import jersey.repackaged.com.google.common.collect.Maps;
@@ -36,8 +35,8 @@ public class ProductResource extends EntityResource<Product> {
 	}
 	
     @POST
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response create(
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
+    public Product create(
     	@FormParam("productSku") String productSku,
         @FormParam("productName") String productName,
         @FormParam("description") String description,
@@ -45,15 +44,16 @@ public class ProductResource extends EntityResource<Product> {
         @FormParam("active") Boolean active,
         @Context HttpServletResponse servletResponse) throws IOException {
     	
-    	getStorage().store(new Product(productSku, productName, description, price, active));
+    	Product resource = new Product(productSku, productName, description, price, active);
+    	getStorage().store(resource);
     	
-    	return Response.ok().build();
+    	return resource;
     }
     
     @PUT
     @Path("{id: \\d+}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response update(
+    public Product update(
     	@PathParam("id") Integer id,
     	@FormParam("productSku") String productSku,
         @FormParam("productName") String productName,
@@ -82,7 +82,7 @@ public class ProductResource extends EntityResource<Product> {
         	getStorage().store(resource);
     	}
     	
-    	return Response.ok().build();
+    	return resource;
     }
     
     @GET

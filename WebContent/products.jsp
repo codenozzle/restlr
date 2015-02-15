@@ -90,6 +90,7 @@
 
 <%@include file="/WEB-INF/jspf/footer-begin.jspf" %>
 
+<script src="assets/js/datatables.js"></script>
 <script>
 $(document).ready(function() {	
 	var columnMap = [
