@@ -18,7 +18,8 @@ public abstract class EntityStorage<T extends Entity> {
     	if (entity.getId() == null) {
     		entity.setId(counter.addAndGet(1));
     	}
-        return storage.put(entity.getId(), entity);
+    	storage.put(entity.getId(), entity);
+        return entity;
     }
 
     public T get(Integer id) {

@@ -39,8 +39,8 @@ public abstract class EntityResource<T extends Entity> {
 
 	protected abstract EntityStorage<T> getStorage();
 	
-	protected Response storeAndReturn(HttpServletResponse servletResponse, T entity) throws IOException {
-		return Response.ok(getStorage().store(entity)).build();
+	protected T storeAndReturn(HttpServletResponse servletResponse, T entity) throws IOException {
+		return getStorage().store(entity);
 	}
 	
 	protected boolean paramCompare(Object object1, Object object2) {

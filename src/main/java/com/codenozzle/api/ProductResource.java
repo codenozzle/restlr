@@ -6,7 +6,6 @@ import java.util.Collection;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -35,34 +34,26 @@ public class ProductResource extends EntityResource<Product> {
 	}
 	
     @POST
-    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
-    public Product create(
-    	@FormParam("productSku") String productSku,
-        @FormParam("productName") String productName,
-        @FormParam("description") String description,
-        @FormParam("price") BigDecimal price,
-        @FormParam("active") Boolean active,
-        @Context HttpServletResponse servletResponse) throws IOException {
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Product create(Product resource, @Context HttpServletResponse servletResponse) throws IOException {
     	
-    	Product resource = new Product(productSku, productName, description, price, active);
-    	getStorage().store(resource);
+    	//Product resource = new Product(productSku, productName, description, price, active);
+    	//getStorage().store(resource);
     	
-    	return resource;
+    	return storeAndReturn(servletResponse, resource);
     }
     
     @PUT
     @Path("{id: \\d+}")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Product update(
     	@PathParam("id") Integer id,
-    	@FormParam("productSku") String productSku,
-        @FormParam("productName") String productName,
-        @FormParam("description") String description,
-        @FormParam("price") BigDecimal price,
-        @FormParam("active") Boolean active,
-        @Context HttpServletResponse servletResponse) throws IOException {
+    	Product resource, 
+    	@Context HttpServletResponse servletResponse) throws IOException {
     	
-    	Product resource = getStorage().get(id);
+    	/*Product resource = getStorage().get(id);
     	if (resource != null) {
     		if (productSku != null) {
         		resource.setProductSku(productSku);
@@ -80,13 +71,15 @@ public class ProductResource extends EntityResource<Product> {
         		resource.setActive(active);
         	}
         	getStorage().store(resource);
-    	}
+    	}*/
     	
-    	return resource;
+    	return storeAndReturn(servletResponse, resource);
     }
     
     @GET
     @Path("/search")
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Collection<Product> search(
     	@QueryParam("id") Integer id,
     	@QueryParam("productSku") String productSku,

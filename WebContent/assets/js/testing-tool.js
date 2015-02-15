@@ -34,28 +34,34 @@ var TESTINGTOOL = (function () {
 		    return formatted;
 		}
 
-		function sendRequest(url, httpCode, data, dataType) {
-			console.log(data);
+		function sendRequest(httpCode, resourceUrl, sendData, sendDataType, receiveDataType) {
+			console.log(httpCode);
+			console.log(resourceUrl);
+			console.log(sendData);
+			console.log(sendDataType);
+			console.log(receiveDataType);
+			
 		    $.ajax({
-		         url: url,
+		         url: resourceUrl,
 		        type: httpCode,
-		        data: data,
-		        dataType: dataType
+		        data: sendData,
+		        dataType: receiveDataType,
+		        contentType: sendDataType
 		    })
 		    .done(function(returnedMedia) {
 		    	var output;
-		    	if (dataType == "json") {
+		    	if (receiveDataType == "json") {
 		    		$("pre").removeClass().addClass("prettyprint lang-json");
 		    		output = JSON.stringify(returnedMedia, null, '\t');
-		    	} else if (dataType == "xml") {
+		    	} else if (receiveDataType == "xml") {
 		    		$("pre").removeClass().addClass("prettyprint lang-xml");
 		    		output = formatXml(new XMLSerializer().serializeToString(returnedMedia));
 		    	}
-		    	$("#rest_output").text(output);
+		    	$("#rest-output").text(output);
 		    	prettyPrint();
 		    })
 		    .fail(function(returnedMedia) {
-		    	$("#rest_output").text("error");
+		    	$("#rest-output").text("error");
 		    });
 		}
 		
@@ -64,18 +70,18 @@ var TESTINGTOOL = (function () {
 		}
 		
 		function showGetOrDelete() {
-			$("#data_textarea_group").hide();
-			$('#data_textarea').text("");
-	    	$('#rest_output').text("");
+			$("#send-data-group").hide();
+			$('#send-data').text("");
+	    	$('#rest-output').text("");
 		}
 		
 		function showPostOrPut() {
-			$("#data_textarea_group").show();
-			$('#data_textarea').text("");
-			$('#rest_output').text("");
+			$("#send-data-group").show();
+			$('#send-data').text("");
+			$('#rest-output').text("");
 		}
 		
-		$("input[name=rest_http_code]").click(function() {
+		$("input[name=http-code]").click(function() {
 	        if (this.value == "get" || this.value == "delete") {
 	        	showGetOrDelete();
 	        } else if (this.value == "post" || this.value == "put") {
@@ -84,11 +90,12 @@ var TESTINGTOOL = (function () {
 	    });
 	    
 		$("#submit-button").click(function() {
-			var url = $("#rest_url").val();
-			var httpCode = $("[name=rest_http_code]:radio:checked").val();
-			var mediaType = $("[name=media_type]:radio:checked").val();
-			var data = $("[name=data_textarea]").val();
-			sendRequest(url, httpCode, data, mediaType);
+			var httpCode = $("[name=http-code]:radio:checked").val();
+			var resourceUrl = $("#resource-url").val();
+			var sendData = $("#send-data").val();
+			var sendDataType = "application/" + $("[name=send-data-type]:radio:checked").val()+"; charset=UTF-8";
+			var receiveDataType = $("[name=receive-data-type]:radio:checked").val();
+			sendRequest(httpCode, resourceUrl, sendData, sendDataType, receiveDataType);
 			event.preventDefault();
 		});
  
