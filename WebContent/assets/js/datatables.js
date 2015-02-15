@@ -28,8 +28,8 @@ var UI = (function () {
 	    
 		$("#submit-button").click(function() {
 			submitForm();
-			refresh();
 			resetUI();
+			refresh();
 		});
 		
 		function createTable() {
@@ -65,12 +65,13 @@ var UI = (function () {
 		        $.ajax({
 		            type: "POST",
 		            url: resourceUrl,
-		            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-		            data: $("form").serialize(),
-		            success: function () {
-		            	createStickyNote();
-		            }
-		        });
+		            contentType: "application/json; charset=utf-8",
+		            dataType: "json",
+		            data: $(this).serializeJSON()
+		        })
+		        .done(function(returnedMedia) {
+		        	createStickyNote();
+			    });
 		    });
 		}
  

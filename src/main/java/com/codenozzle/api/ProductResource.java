@@ -7,7 +7,6 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -32,54 +31,38 @@ public class ProductResource extends EntityResource<Product> {
 	public ProductStorage getStorage() {
 		return AppStorage.PRODUCT;
 	}
-	
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Product create(Product resource, @Context HttpServletResponse servletResponse) throws IOException {
-    	
-    	//Product resource = new Product(productSku, productName, description, price, active);
-    	//getStorage().store(resource);
-    	
-    	return storeAndReturn(servletResponse, resource);
-    }
     
     @PUT
     @Path("{id: \\d+}")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Product update(
     	@PathParam("id") Integer id,
-    	Product resource, 
+    	Product updates, 
     	@Context HttpServletResponse servletResponse) throws IOException {
-    	
-    	/*Product resource = getStorage().get(id);
+
+    	Product resource = getStorage().get(id);
     	if (resource != null) {
-    		if (productSku != null) {
-        		resource.setProductSku(productSku);
+    		if (updates.getProductSku() != null) {
+        		resource.setProductSku(updates.getProductSku());
         	}
-        	if (productName != null) {
-        		resource.setProductName(productName);
+        	if (updates.getProductName() != null) {
+        		resource.setProductName(updates.getProductName());
         	}
-        	if (description != null) {
-        		resource.setDescription(description);
+        	if (updates.getDescription() != null) {
+        		resource.setDescription(updates.getDescription());
         	}
-        	if (price != null) {
-        		resource.setPrice(price);
+        	if (updates.getPrice() != null) {
+        		resource.setPrice(updates.getPrice());
         	}
-        	if (active != null) {
-        		resource.setActive(active);
+        	if (updates.isActive() != null) {
+        		resource.setActive(updates.isActive());
         	}
-        	getStorage().store(resource);
-    	}*/
+    	}
     	
-    	return storeAndReturn(servletResponse, resource);
+    	return storeAndReturn(resource);
     }
     
     @GET
     @Path("/search")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Collection<Product> search(
     	@QueryParam("id") Integer id,
     	@QueryParam("productSku") String productSku,

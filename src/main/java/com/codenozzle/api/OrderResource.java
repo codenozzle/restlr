@@ -4,15 +4,12 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import com.codenozzle.db.AppStorage;
 import com.codenozzle.db.OrderStorage;
@@ -27,43 +24,28 @@ public class OrderResource extends EntityResource<Order> {
 	public OrderStorage getStorage() {
 		return AppStorage.ORDER;
 	}
-	
-    @POST
-    public Response create(
-    	@FormParam("userId") Integer userId,
-        @FormParam("shippingAddressId") Integer shippingAddressId,
-        @FormParam("billingAddressId") Integer billingAddressId,
-        @Context HttpServletResponse servletResponse) throws IOException {
-    	
-    	getStorage().store(new Order(userId, shippingAddressId, billingAddressId));
-    	return Response.ok().build();
-    }
     
     @PUT
     @Path("{id: \\d+}")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response update(
+    public Order update(
     	@PathParam("id") Integer id,
-    	@FormParam("userId") Integer userId,
-        @FormParam("shippingAddressId") Integer shippingAddressId,
-        @FormParam("billingAddressId") Integer billingAddressId,
-        @Context HttpServletResponse servletResponse) throws IOException {
+    	Order updates, 
+    	@Context HttpServletResponse servletResponse) throws IOException {
     	
     	Order resource = getStorage().get(id);
     	if (resource != null) {
-    		if (userId != null) {
-        		resource.setUserId(userId);
+    		if (updates.getUserId() != null) {
+        		resource.setUserId(updates.getUserId());
         	}
-        	if (shippingAddressId != null) {
-        		resource.setShippingAddressId(shippingAddressId);
+        	if (updates.getShippingAddressId() != null) {
+        		resource.setShippingAddressId(updates.getShippingAddressId());
         	}
-        	if (billingAddressId != null) {
-        		resource.setBillingAddressId(billingAddressId);
+        	if (updates.getBillingAddressId() != null) {
+        		resource.setBillingAddressId(updates.getBillingAddressId());
         	}
-        	getStorage().store(resource);
     	}
     	
-    	return Response.ok().build();
+    	return storeAndReturn(resource);
     }
     
 }

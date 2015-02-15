@@ -35,13 +35,7 @@ var TESTINGTOOL = (function () {
 		}
 
 		function sendRequest(httpCode, resourceUrl, sendData, sendDataType, receiveDataType) {
-			console.log(httpCode);
-			console.log(resourceUrl);
-			console.log(sendData);
-			console.log(sendDataType);
-			console.log(receiveDataType);
-			
-		    $.ajax({
+			$.ajax({
 		         url: resourceUrl,
 		        type: httpCode,
 		        data: sendData,
@@ -71,13 +65,13 @@ var TESTINGTOOL = (function () {
 		
 		function showGetOrDelete() {
 			$("#send-data-group").hide();
-			$('#send-data').text("");
+			$('#send-data').val("");
 	    	$('#rest-output').text("");
 		}
 		
 		function showPostOrPut() {
 			$("#send-data-group").show();
-			$('#send-data').text("");
+			$('#send-data').val("");
 			$('#rest-output').text("");
 		}
 		

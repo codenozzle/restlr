@@ -3,12 +3,11 @@ package com.codenozzle.api;
 import java.io.IOException;
 import java.util.Collection;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.core.Response;
 
 import com.codenozzle.db.EntityStorage;
 import com.codenozzle.model.Entity;
@@ -26,6 +25,11 @@ public abstract class EntityResource<T extends Entity> {
         return getStorage().get(id);
     }
 
+	@POST
+    public T create(T entity /*, @Context HttpServletResponse servletResponse*/) throws IOException {
+    	return storeAndReturn(entity);
+    }
+	
     @DELETE
     @Path("{id: \\d+}")
     public T remove(@PathParam("id") Integer id) {
@@ -39,7 +43,7 @@ public abstract class EntityResource<T extends Entity> {
 
 	protected abstract EntityStorage<T> getStorage();
 	
-	protected T storeAndReturn(HttpServletResponse servletResponse, T entity) throws IOException {
+	protected T storeAndReturn(T entity /*, HttpServletResponse servletResponse*/) throws IOException {
 		return getStorage().store(entity);
 	}
 	

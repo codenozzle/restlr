@@ -39,7 +39,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-6 col-sm-2">
-							<a href="index.jsp" class="logo_main" title="Restlr Admin"><img src="assets/images/restlr_logo.png" alt=""></a>
+							<a href="products.jsp" class="logo_main" title="Restlr Admin"><img src="assets/images/restlr_logo.png" alt=""></a>
 						</div>
 					</div>
 				</div>
@@ -47,28 +47,6 @@
 			<nav id="top_navigation">
 				<div class="container">
 					<ul id="icon_nav_h" class="top_ico_nav clearfix">
-						<!-- 
-						<li <%= (pageName == "dashboard") ? " class=\"active\"" : "" %>>
-							<a href="index.jsp">
-								<i class="icon-home icon-2x"></i>
-								<span class="menu_label">Dashboard</span>
-							</a>
-						</li>
-						 -->
-						<!-- 
-						<li<%= (pageName == "orders") ? " class=\"active\"" : "" %>>             
-							<a href="orders.jsp">
-								<span class="label label-success">15</span>
-								<i class="icon-tags icon-2x"></i>
-								<span class="menu_label">Orders</span>
-							</a>
-						</li>
-						<li<%= (pageName == "reports") ? " class=\"active\"" : "" %>>             
-							<a href="reports.jsp">
-								<i class="icon-bar-chart icon-2x"></i>
-								<span class="menu_label">Reports</span>
-							</a>
-						</li> -->
 						<li<%= (pageName == "products") ? " class=\"active\"" : "" %>>             
 							<a href="products.jsp">
 								<i class="icon-edit icon-2x"></i>
@@ -80,15 +58,7 @@
 								<i class="icon-group icon-2x"></i>
 								<span class="menu_label">Users</span>
 							</a>
-						</li>												
-						<!--
-						<li<%= (pageName == "settings") ? " class=\"active\"" : "" %>>             
-							<a href="settings.jsp">
-								<i class="icon-wrench icon-2x"></i>
-								<span class="menu_label">Settings</span>
-							</a>
 						</li>
-						-->
 						<li<%= (pageName == "testing-tool") ? " class=\"active\"" : "" %>>             
 							<a href="testing-tool.jsp">
 								<i class="icon-wrench icon-2x"></i>

@@ -5,9 +5,7 @@ import java.util.Collection;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -15,7 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import jersey.repackaged.com.google.common.base.Predicate;
 import jersey.repackaged.com.google.common.collect.Maps;
@@ -34,48 +31,30 @@ public class UserResource extends EntityResource<User> {
 		return AppStorage.USER;
 	}
     
-    @POST
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response create(
-    	@FormParam("firstName") String firstName,
-        @FormParam("lastName") String lastName,
-        @FormParam("emailAddress") String emailAddress,
-        @FormParam("active") Boolean active,
-        @Context HttpServletResponse servletResponse) throws IOException {
-    	
-    	getStorage().store(new User(firstName, lastName, emailAddress, active));
-    	return Response.ok().build();
-    }
-    
     @PUT
     @Path("{id: \\d+}")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response update(
+    public User update(
     	@PathParam("id") Integer id,
-    	@FormParam("firstName") String firstName,
-        @FormParam("lastName") String lastName,
-        @FormParam("emailAddress") String emailAddress,
-        @FormParam("active") Boolean active,
-        @Context HttpServletResponse servletResponse) throws IOException {
+    	User updates, 
+    	@Context HttpServletResponse servletResponse) throws IOException {
     	
     	User resource = getStorage().get(id);
     	if (resource != null) {
-    		if (firstName != null) {
-        		resource.setFirstName(firstName);
+    		if (updates.getFirstName() != null) {
+        		resource.setFirstName(updates.getFirstName());
         	}
-        	if (lastName != null) {
-        		resource.setLastName(lastName);
+        	if (updates.getLastName() != null) {
+        		resource.setLastName(updates.getLastName());
         	}
-        	if (emailAddress != null) {
-        		resource.setEmailAddress(emailAddress);
+        	if (updates.getEmailAddress() != null) {
+        		resource.setEmailAddress(updates.getEmailAddress());
         	}
-        	if (active != null) {
-        		resource.setActive(active);
+        	if (updates.isActive() != null) {
+        		resource.setActive(updates.isActive());
         	}
-        	getStorage().store(resource);
     	}
     	
-    	return Response.ok().build();
+    	return storeAndReturn(resource);
     }
     
     @GET
