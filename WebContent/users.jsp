@@ -6,10 +6,10 @@
 						
 <!-- control buttons -->
 <div class="row" id="control-buttons">
-	<div class="col-sm-4">
+	<div class="col-sm-3">
 		<button type="button" class="btn btn-default btn-lg" id="create-new-button">Create New User</button>
 	</div>
-	<div class="col-sm-4">
+	<div class="col-sm-3">
 		<button type="button" class="btn btn-default btn-lg" id="refresh-button">Refresh</button>
 	</div>
 </div>
@@ -19,7 +19,7 @@
 	<div class="col-sm-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h4 class="panel-title">Create</h4>
+				<h4 class="panel-title">User</h4>
 			</div>
 			<div class="panel-body">
 				<form id="create-form">
@@ -51,6 +51,8 @@
 						</div>
 					</div>
 					<button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
+					<button type="button" class="btn btn-default" id="update-button">Update</button>
+					<button type="button" class="btn btn-danger" id="delete-button">Delete</button>
 					<button type="button" class="btn btn-default" id="cancel-button">Cancel</button>
 				</form>
 			</div>
@@ -72,6 +74,7 @@
 						<th>Last Name</th>
 						<th>Email</th>
 						<th>Active</th>
+						<th>&nbsp;</th>
 					</tr>
 				</thead>
 			</table>
@@ -83,16 +86,27 @@
 
 <script src="assets/js/datatables.js"></script>
 <script>
+var ui = UI.getInstance("/restlr/api/user/");
+
 $(document).ready(function() {	
 	var columnMap = [
      	{ "mDataProp": "firstName" },
      	{ "mDataProp": "lastName" },
      	{ "mDataProp": "emailAddress" },
-     	{ "mDataProp": "active" }
-     ];
+     	{ "mDataProp": "active" },
+     	{ "mDataProp": "id" }
+    ];
 
-    var ui = UI.getInstance("/restlr/api/user/", columnMap, "#dt_basic2");
-    ui.createTable();    
+	var columnDefs = [{
+		"aTargets": [4],
+	    "mDataProp": "id",
+	    "bSortable": false,
+	    "mRender": function (data, type, row) {
+	    	return '<button id="manage" onclick="ui.showEdit(' + data + ')">Manage</button>';
+	    }
+	}];
+    
+    ui.createTable(columnMap, columnDefs, "#dt_basic2");    
 });
 </script>
 

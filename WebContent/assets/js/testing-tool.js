@@ -43,20 +43,30 @@ var TESTINGTOOL = (function () {
 		        contentType: sendDataType
 		    })
 		    .done(function(returnedMedia) {
-		    	var output;
-		    	if (receiveDataType == "json") {
-		    		$("pre").removeClass().addClass("prettyprint lang-json");
-		    		output = JSON.stringify(returnedMedia, null, '\t');
-		    	} else if (receiveDataType == "xml") {
-		    		$("pre").removeClass().addClass("prettyprint lang-xml");
-		    		output = formatXml(new XMLSerializer().serializeToString(returnedMedia));
-		    	}
-		    	$("#rest-output").text(output);
-		    	prettyPrint();
+		    	showSuccessOutput(receiveDataType, returnedMedia);
 		    })
 		    .fail(function(returnedMedia) {
-		    	$("#rest-output").text("error");
+		    	showErrorOutput(returnedMedia);
 		    });
+		}
+		
+		function showSuccessOutput(receiveDataType, returnedMedia) {
+			var output;
+	    	if (receiveDataType == "json") {
+	    		$("pre").removeClass().addClass("prettyprint lang-json");
+	    		output = JSON.stringify(returnedMedia, null, '\t');
+	    	} else if (receiveDataType == "xml") {
+	    		$("pre").removeClass().addClass("prettyprint lang-xml");
+	    		output = formatXml(new XMLSerializer().serializeToString(returnedMedia));
+	    	}
+	    	$("#rest-output").text(output);
+	    	prettyPrint();
+		}
+		
+		function showErrorOutput(returnedMedia) {
+			console.log(returnedMedia);
+	    	$("pre").removeClass().addClass("prettyprint lang-json");
+	    	$("#rest-output").text(JSON.stringify(returnedMedia, null, '\t'));
 		}
 		
 		function resetUI() {

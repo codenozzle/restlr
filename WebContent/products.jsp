@@ -6,10 +6,10 @@
 
 <!-- control buttons -->
 <div class="row" id="control-buttons">
-	<div class="col-sm-4">
+	<div class="col-sm-3">
 		<button type="button" class="btn btn-default btn-lg" id="create-new-button">Create New Product</button>
 	</div>
-	<div class="col-sm-4">
+	<div class="col-sm-3">
 		<button type="button" class="btn btn-default btn-lg" id="refresh-button">Refresh</button>
 	</div>
 </div>
@@ -19,7 +19,7 @@
 	<div class="col-sm-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h4 class="panel-title">Create</h4>
+				<h4 class="panel-title">Product</h4>
 			</div>
 			<div class="panel-body">
 				<form id="create-form">
@@ -59,6 +59,8 @@
 						</div>
 					</div>
 					<button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
+					<button type="submit" class="btn btn-primary" id="update-button">Update</button>
+					<button type="button" class="btn btn-danger" id="delete-button">Delete</button>
 					<button type="button" class="btn btn-default" id="cancel-button">Cancel</button>
 				</form>
 			</div>
@@ -81,6 +83,7 @@
 						<th>Description</th>
 						<th>Price</th>
 						<th>Active</th>
+						<th>&nbsp;</th>
 					</tr>
 				</thead>
 			</table>
@@ -92,17 +95,29 @@
 
 <script src="assets/js/datatables.js"></script>
 <script>
+var ui = UI.getInstance("/restlr/api/product/");
+
 $(document).ready(function() {	
 	var columnMap = [
      	{ "mDataProp": "productSku" },
      	{ "mDataProp": "productName" },
      	{ "mDataProp": "description" },
      	{ "mDataProp": "price" },
-     	{ "mDataProp": "active" }
-     ];
-
-    var ui = UI.getInstance("/restlr/api/product/", columnMap, "#dt_basic2");
-    ui.createTable();    
+     	{ "mDataProp": "active" },
+     	{ "mDataProp": "id" }
+    ];
+	
+	var columnDefs = [{
+		"aTargets": [5],
+	    "mDataProp": "id",
+	    "bSortable": false,
+	    "mRender": function (data, type, row) {
+	    	return '<button id="manage" onclick="ui.showEdit(' + data + ')">Manage</button>';
+	    }
+	}];
+    
+    ui.createTable(columnMap, columnDefs, "#dt_basic2");
+    
 });
 </script>
 
