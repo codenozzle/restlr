@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* Main
+web: java $JAVA_OPTS -cp target/classes/com/codenozzle/app:target/m2e-wtp/* RestApp
