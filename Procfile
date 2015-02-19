@@ -1,1 +1,1 @@
-web:    java -cp target/classes:target/dependency/* RestApp
+web:    java -cp target/classes/com/codenozzle/app:target/dependency/* RestApp
