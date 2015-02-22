@@ -26,15 +26,15 @@ A RESTful API in Java using Jersey
 
 || Searches all resources
 ----------- | ----------- | -----------
-| GET | curl -H "Accept: application/json" http://localhost:8080/restlr/api/product/search?productSku=HD-7906 |
+| GET | curl -H "Accept: application/json" http://localhost:8080/restlr/api/product/search?productSku=MB-284 |
 
 || Creates a single resource
 ----------- | ----------- | -----------
-| POST | curl -H "Accept: application/json" -X POST -d "productSku=PR-2349&productName=Product&description=Description&price=19.99&active=true" http://localhost:8080/restlr/api/product/ |
+| POST | curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{ "active": true, "description": "Solid State Hard Drive", "price": 1000, "productName": "SSHD", "productSku": "SSHD-1234" }' http://localhost:8080/restlr/api/product/ |
 
 || Modifies a single resource
 ----------- | ----------- | -----------
-| PUT | curl -H "Accept: application/json" -X PUT -d "price=2000.00" http://localhost:8080/restlr/api/product/1 |
+| PUT | curl -H "Accept: application/json" -H "Content-Type: application/json" -X PUT -d '{ "price": 2000 }' http://localhost:8080/restlr/api/product/1 |
 
 || Deletes a single resource
 ----------- | ----------- | -----------
