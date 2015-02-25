@@ -59,5 +59,9 @@ public abstract class EntityStorage<T extends Entity> {
     public T getRandom() {
     	return storage.get(getRandomKey());
 	}
+
+	public int size() {
+		return storage.size();
+	}
     
 }

@@ -3,6 +3,14 @@ var TESTINGTOOL = (function () {
 	
 	function init() {
 		
+		var stickyNoteDefaults = {
+	        position: "top-right",
+	        speed: "fast",
+	        allowdupes: true,
+	        autoclose: 800,
+	        classList: ""
+	    };
+		
 		function formatXml(xml) {
 		    var formatted = '';
 		    var reg = /(>)(<)(\/*)/g;
@@ -85,6 +93,10 @@ var TESTINGTOOL = (function () {
 			$('#rest-output').text("");
 		}
 		
+		function createStickyNote(message) {
+			$.stickyNote(message, $.extend({}, stickyNoteDefaults, { classList: "stickyNote-success" }));
+		}
+		
 		$("input[name=http-code]").click(function() {
 	        if (this.value == "get" || this.value == "delete") {
 	        	showGetOrDelete();
@@ -101,6 +113,11 @@ var TESTINGTOOL = (function () {
 			var receiveDataType = $("[name=receive-data-type]:radio:checked").val();
 			sendRequest(httpCode, resourceUrl, sendData, sendDataType, receiveDataType);
 			event.preventDefault();
+		});
+		
+		$("#reset-button").click(function() {
+			sendRequest("get", "/restlr/api/resetappdata", {}, "application/json; charset=utf-8", "json");
+			createStickyNote("App Data reset successfully!");
 		});
  
 	    return {

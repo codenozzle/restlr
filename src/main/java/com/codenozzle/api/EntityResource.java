@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
 
 import com.codenozzle.db.EntityStorage;
 import com.codenozzle.model.Entity;
@@ -37,9 +38,16 @@ public abstract class EntityResource<T extends Entity> {
     }
 
     @DELETE
-    public Integer removeAll() {
-    	return getStorage().removeAll();
+    public Response removeAll() {
+    	getStorage().removeAll();
+    	return Response.ok().build();
     }
+    
+    /*@GET
+    @Path("/count")
+    public Integer count() {
+        return getStorage().size();
+    }*/
 
 	protected abstract EntityStorage<T> getStorage();
 	

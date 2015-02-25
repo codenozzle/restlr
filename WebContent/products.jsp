@@ -15,7 +15,7 @@
 </div>
 					
 <!-- create form -->
-<div class="row" id="create-form" style="display: none;">
+<div class="row" id="create-form-container" style="display: none;">
 	<div class="col-sm-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">

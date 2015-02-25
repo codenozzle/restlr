@@ -47,6 +47,12 @@
 			<nav id="top_navigation">
 				<div class="container">
 					<ul id="icon_nav_h" class="top_ico_nav clearfix">
+						<li<%= (pageName == "dashboard") ? " class=\"active\"" : "" %>>             
+							<a href="index.jsp">
+								<i class="icon-home icon-2x"></i>
+								<span class="menu_label">Dashboard</span>
+							</a>
+						</li>
 						<li<%= (pageName == "products") ? " class=\"active\"" : "" %>>             
 							<a href="products.jsp">
 								<i class="icon-edit icon-2x"></i>

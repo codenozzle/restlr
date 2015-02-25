@@ -71,9 +71,24 @@ var UI = (function () {
 		    });
 		}
 		
+
+		$.fn.clearForm = function() {
+			return this.each(function() {
+				var type = this.type, tag = this.tagName.toLowerCase();
+				if (tag == 'form')
+					return $(':input', this).clearForm();
+				if (type == 'text' || type == 'password' || tag == 'textarea')
+					this.value = '';
+				else if (type == 'checkbox')
+					this.checked = false;
+				else if (tag == 'select')
+					this.selectedIndex = -1;
+			});
+		};
+		
 		function resetUI() {
 			refreshResults();
-			$("#create-form").hide();
+			$("#create-form-container").hide();
 	    	$('#search-results').show();
 	    	$("#control-buttons").show();
 		}
@@ -84,8 +99,10 @@ var UI = (function () {
 			$("#update-button").hide();
 			$("#delete-button").hide();
 			
-	    	$("#create-form").show();
+	    	$("#create-form-container").show();
 	    	$("#submit-button").show();
+	    	
+	    	$('#create-form').clearForm();
 		}
 		
 		function showEdit(id) {
@@ -93,7 +110,7 @@ var UI = (function () {
 			$("#control-buttons").hide();
 			$("#submit-button").hide();
 			
-	    	$("#create-form").show();
+	    	$("#create-form-container").show();
 	    	$("#update-button").show();
 			$("#delete-button").show();	    	
 	    	loadForm(id);
@@ -115,7 +132,7 @@ var UI = (function () {
 	    	showCreate();
 	    });
 	    
-	    $("#refreshResults-button").click(function() {
+	    $("#refresh-button").click(function() {
 	    	refreshResults();
 	    });
 	    

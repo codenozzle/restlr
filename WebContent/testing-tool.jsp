@@ -3,7 +3,13 @@
 	String pageName = "testing-tool";
 %>
 <%@include file="/WEB-INF/jspf/header.jspf" %>
-					
+
+<div class="row">
+	<div class="col-sm-12">
+		<button type="button" class="btn btn-danger" id="reset-button">Reset App Data</button>
+	</div>
+</div>
+	
 <!-- create form -->
 <div class="row" id="create-form">
 	<div class="col-sm-12">
