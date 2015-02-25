@@ -13,7 +13,8 @@ A RESTful API in Java using Jersey
 
 ### App and UI
 - The link below will take you to a UI based on a Bootstrap 3 theme. The UI interactions and ajax operations are from jQuery. Please note that this application is a work in progress and some features might not be fully functional yet.
-  - App Link: [http://localhost:8080/restlr/products.jsp](http://localhost:8080/restlr/products.jsp)
+  - Local App Link: [http://localhost:8080/restlr/products.jsp](http://localhost:8080/restlr/products.jsp)
+  - Public App Link: [http://codenozzle.com/restlr/products.jsp](http://codenozzle.com/restlr/products.jsp)
 
 ### Using cUrl to perform CRUDS operations against the API
 || Gets all resources
