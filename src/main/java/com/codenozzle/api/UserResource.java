@@ -6,9 +6,7 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
@@ -30,32 +28,6 @@ public class UserResource extends EntityResource<User> {
 	public UserStorage getStorage() {
 		return AppStorage.USER;
 	}
-    
-    @PUT
-    @Path("{id: \\d+}")
-    public User update(
-    	@PathParam("id") Integer id,
-    	User updates, 
-    	@Context HttpServletResponse servletResponse) throws IOException {
-    	
-    	User resource = getStorage().get(id);
-    	if (resource != null) {
-    		if (updates.getFirstName() != null) {
-        		resource.setFirstName(updates.getFirstName());
-        	}
-        	if (updates.getLastName() != null) {
-        		resource.setLastName(updates.getLastName());
-        	}
-        	if (updates.getEmailAddress() != null) {
-        		resource.setEmailAddress(updates.getEmailAddress());
-        	}
-        	if (updates.isActive() != null) {
-        		resource.setActive(updates.isActive());
-        	}
-    	}
-    	
-    	return storeAndReturn(resource);
-    }
     
     @GET
     @Path("/search")

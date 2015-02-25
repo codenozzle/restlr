@@ -6,8 +6,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.codenozzle.model.Entity;
 import jersey.repackaged.com.google.common.collect.Maps;
+
+import com.codenozzle.model.Entity;
 
 public abstract class EntityStorage<T extends Entity> {
 
@@ -20,6 +21,10 @@ public abstract class EntityStorage<T extends Entity> {
     	}
     	storage.put(entity.getId(), entity);
         return entity;
+    }
+	
+	public T update(Integer id, final T entity) {
+        return store(merge(get(id), entity));
     }
 
     public T get(Integer id) {
@@ -63,5 +68,7 @@ public abstract class EntityStorage<T extends Entity> {
 	public int size() {
 		return storage.size();
 	}
+	
+	public abstract T merge(T current, T updates);
     
 }

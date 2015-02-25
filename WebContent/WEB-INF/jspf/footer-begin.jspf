@@ -8,13 +8,13 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                &copy; 2015 Code Nozzle
+                &copy; 2015 Restlr
             </div>
             <div class="col-sm-8">
             
             </div>
             <div class="col-sm-1 text-right">
-                <small class="text-muted">v1.0</small>
+                <small class="text-muted">v0.1</small>
             </div>
         </div>
     </div>

@@ -1,6 +1,5 @@
 package com.codenozzle.db;
 
-
 public class AppStorage {
 
 	public static final UserStorage USER = new UserStorage();

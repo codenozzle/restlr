@@ -6,9 +6,7 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
@@ -30,35 +28,6 @@ public class AddressResource extends EntityResource<Address> {
 	public AddressStorage getStorage() {
 		return AppStorage.ADDRESS;
 	}
-    
-    @PUT
-    @Path("{id: \\d+}")
-    public Address update(
-    	@PathParam("id") Integer id,
-    	Address updates, 
-    	@Context HttpServletResponse servletResponse) throws IOException {
-    	
-    	Address resource = getStorage().get(id);
-    	if (resource != null) {
-    		if (updates.getAddress1() != null) {
-        		resource.setAddress1(updates.getAddress1());
-        	}
-        	if (updates.getAddress2() != null) {
-        		resource.setAddress2(updates.getAddress2());
-        	}
-        	if (updates.getCity() != null) {
-        		resource.setCity(updates.getCity());
-        	}
-        	if (updates.getState() != null) {
-        		resource.setState(updates.getState());
-        	}
-        	if (updates.getZip() != null) {
-        		resource.setZip(updates.getZip());
-        	}
-    	}
-    	
-    	return storeAndReturn(resource);
-    }
     
     @GET
     @Path("/search")

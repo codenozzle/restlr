@@ -3,11 +3,14 @@ package com.codenozzle.api;
 import java.io.IOException;
 import java.util.Collection;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import com.codenozzle.db.EntityStorage;
@@ -31,7 +34,17 @@ public abstract class EntityResource<T extends Entity> {
     	return storeAndReturn(entity);
     }
 	
-    @DELETE
+	@PUT
+    @Path("{id: \\d+}")
+    public T update(
+    	@PathParam("id") Integer id,
+    	T updates, 
+    	@Context HttpServletResponse servletResponse) throws IOException {
+
+    	return update(id, updates);
+    }
+
+	@DELETE
     @Path("{id: \\d+}")
     public T remove(@PathParam("id") Integer id) {
         return getStorage().remove(id);
@@ -53,6 +66,10 @@ public abstract class EntityResource<T extends Entity> {
 	
 	protected T storeAndReturn(T entity /*, HttpServletResponse servletResponse*/) throws IOException {
 		return getStorage().store(entity);
+	}
+	
+	protected T update(Integer id, T updates) {
+		return getStorage().update(id, updates);
 	}
 	
 	protected boolean paramCompare(Object object1, Object object2) {

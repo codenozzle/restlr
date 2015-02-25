@@ -15,9 +15,11 @@ import com.codenozzle.app.Randomizer;
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class ResetAppDataResource {
+	
 	@GET
     public Response resetAppData(@Context HttpServletResponse servletResponse) {
 		Randomizer.reloadSampleData();
         return Response.ok().build();
     }
+	
 }
