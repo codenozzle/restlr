@@ -6,6 +6,8 @@ A RESTful API in Java using Jersey
   - Initializes RESTful service and loads test data 
 - src/main/java/com/codenozzle/db/
   - Map-based object store to simulate a database
+- src/main/java/com/codenozzle/messagewriter/
+  - Defines media writers for custom marshalling
 - src/main/java/com/codenozzle/model/
   - JAXB annotated POJOs used to marshall data into media formats
 - src/main/java/com/codenozzle/api/
@@ -13,10 +15,10 @@ A RESTful API in Java using Jersey
 
 ### App and UI
 - The link below will take you to a UI based on a Bootstrap 3 theme. The UI interactions and ajax operations are from jQuery. Please note that this application is a work in progress and some features might not be fully functional yet.
-  - Local App Link: [http://localhost:8080/restlr/products.jsp](http://localhost:8080/restlr/products.jsp)
-  - Public App Link: [http://codenozzle.com/restlr/products.jsp](http://codenozzle.com/restlr/products.jsp)
+  - Local App: [http://localhost:8080/restlr/products.jsp](http://localhost:8080/restlr/products.jsp)
+  - Public App: [http://codenozzle.com/restlr/products.jsp](http://codenozzle.com/restlr/products.jsp)
 
-### WADL ()
+### WADL (Web Application Description Language)
 - Simplified WADL: [http://codenozzle.com/restlr/api/application.wadl](http://codenozzle.com/restlr/api/application.wadl)
 - Detailed WADL: [http://codenozzle.com/restlr/api/application.wadl?detail](http://codenozzle.com/restlr/api/application.wadl?detail)
 
