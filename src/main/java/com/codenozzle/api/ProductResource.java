@@ -22,7 +22,7 @@ import com.codenozzle.model.Product;
 
 @Path("product")
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN})
 public class ProductResource extends EntityResource<Product> {
     
 	@Override

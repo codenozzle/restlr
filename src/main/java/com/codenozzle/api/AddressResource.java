@@ -21,7 +21,7 @@ import com.codenozzle.model.Address;
 
 @Path("address")
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN})
 public class AddressResource extends EntityResource<Address> {
 
 	@Override

@@ -56,11 +56,11 @@ public abstract class EntityResource<T extends Entity> {
     	return Response.ok().build();
     }
     
-    /*@GET
+    @GET
     @Path("/count")
     public Integer count() {
         return getStorage().size();
-    }*/
+    }
 
 	protected abstract EntityStorage<T> getStorage();
 	

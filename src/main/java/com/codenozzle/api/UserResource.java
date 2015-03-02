@@ -21,7 +21,7 @@ import com.codenozzle.model.User;
 
 @Path("user")
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN})
 public class UserResource extends EntityResource<User> {
 	
 	@Override
