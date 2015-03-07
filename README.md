@@ -43,7 +43,7 @@ A RESTful API in Java using Jersey
 - src/main/java/com/codenozzle/app/
   - Initializes RESTful service and loads test data 
 - src/main/java/com/codenozzle/db/
-  - Map-based object store to simulate a database
+  - Map-based key/value store
 - src/main/java/com/codenozzle/messagewriter/
   - Defines media writers for custom marshalling
 - src/main/java/com/codenozzle/model/
