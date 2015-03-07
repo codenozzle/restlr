@@ -36,6 +36,7 @@ public class Randomizer {
 		AppStorage.PRODUCT.removeAll();
 		AppStorage.ADDRESS.removeAll();
 		AppStorage.USER.removeAll();
+		AppStorage.IMAGES.removeAll();
 	}
 
 	private static void loadSampleAddresses() {

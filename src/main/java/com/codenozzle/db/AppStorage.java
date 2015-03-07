@@ -6,5 +6,6 @@ public class AppStorage {
 	public static final ProductStorage PRODUCT = new ProductStorage();
 	public static final OrderStorage ORDER = new OrderStorage();
 	public static final AddressStorage ADDRESS = new AddressStorage();
+	public static final FileDataStorage IMAGES = new FileDataStorage();
 	
 }

@@ -34,6 +34,9 @@
 							<label class="radio-inline">
 								<input type="radio" name="http-code" id="http-code-delete" value="delete"> DELETE
 							</label>
+							<label class="radio-inline">
+								<input type="radio" name="http-code" id="http-code-file" value="file"> FILE
+							</label>
 						</div>
 					</div>
 					<div class="form-group">
@@ -54,6 +57,16 @@
 								<label class="radio-inline">
 									<input type="radio" name="send-data-type" id="send-data-json" value="json" checked> JSON
 								</label>
+							</div>
+						</div>
+						<hr />
+					</div>
+					<div id="send-file-group" style="display: none;">
+						<hr />
+						<div class="form-group">
+							<label for="file" class="col-sm-2 control-label">File</label>
+							<div class="col-sm-10">
+								<input type="file" name="file" id="file" size="50" />
 							</div>
 						</div>
 						<hr />

@@ -33,6 +33,17 @@
 		</div>
 	</div>
 </div>
+<div class="row">
+	<div class="col-lg-3 col-md-3">
+		<div class="box_stat box_ico">
+			<a href="#">
+				<span class="stat_ico stat_ico_1"><i class="icon-camera-retro"></i></span>
+			</a>
+			<h4 id="image-count"></h4>
+			<small>Images</small>
+		</div>
+	</div>
+</div>
 
 <%@include file="/WEB-INF/jspf/footer-begin.jspf" %>
 
@@ -48,6 +59,10 @@ $(document).ready(function() {
 	
 	$.get("/restlr/api/order/count/", function(data) {
 		$("#order-count").text(data);
+	});
+	
+	$.get("/restlr/api/image/count/", function(data) {
+		$("#image-count").text(data);
 	});
 });
 </script>

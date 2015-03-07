@@ -41,22 +41,6 @@ var TESTINGTOOL = (function () {
 		 
 		    return formatted;
 		}
-
-		function sendRequest(httpCode, resourceUrl, sendData, sendDataType, receiveDataType) {
-			$.ajax({
-		         url: resourceUrl,
-		        type: httpCode,
-		        data: sendData,
-		        dataType: receiveDataType,
-		        contentType: sendDataType
-		    })
-		    .done(function(returnedMedia) {
-		    	showSuccessOutput(receiveDataType, returnedMedia);
-		    })
-		    .fail(function(returnedMedia) {
-		    	showErrorOutput(returnedMedia);
-		    });
-		}
 		
 		function showSuccessOutput(receiveDataType, returnedMedia) {
 			var output;
@@ -83,14 +67,23 @@ var TESTINGTOOL = (function () {
 		
 		function showGetOrDelete() {
 			$("#send-data-group").hide();
+			$("#send-file-group").hide();
 			$('#send-data').val("");
 	    	$('#rest-output').text("");
 		}
 		
 		function showPostOrPut() {
 			$("#send-data-group").show();
+			$("#send-file-group").hide();
 			$('#send-data').val("");
 			$('#rest-output').text("");
+		}
+		
+		function showFile() {
+			$("#send-data-group").hide();
+			$('#send-data').val("");
+	    	$('#rest-output').text("");
+	    	$("#send-file-group").show();
 		}
 		
 		function createStickyNote(message) {
@@ -102,16 +95,61 @@ var TESTINGTOOL = (function () {
 	        	showGetOrDelete();
 	        } else if (this.value == "post" || this.value == "put") {
 	        	showPostOrPut();
+	        } else if (this.value == "file") {
+	        	showFile();
 	        }
 	    });
 	    
+		function sendRequest(type, url, data, contentType, dataType, processData) {
+			/*console.log(type);
+			console.log(url);
+			console.log(data);
+			console.log(contentType);
+			console.log(dataType);
+			console.log(processData);*/
+			$.ajax({
+		         url: url,
+		        type: type,
+		        data: data,
+		        dataType: dataType,
+		        contentType: contentType,
+		        processData: processData, 
+		        cache: false
+		    })
+		    .done(function(returnedMedia) {
+		    	showSuccessOutput(dataType, returnedMedia);
+		    })
+		    .fail(function(returnedMedia) {
+		    	showErrorOutput(returnedMedia);
+		    });
+		}
+		
 		$("#submit-button").click(function() {
-			var httpCode = $("[name=http-code]:radio:checked").val();
+			var sendData;
+			var sendDataType;
+			var processData;
+			var httpCode;
+			var httpCodeVal = $("[name=http-code]:radio:checked").val();
+			if (httpCodeVal == "file") {
+				httpCode = "post";
+				sendDataType = false;
+				processData = false;
+				var data = new FormData();
+				$.each($('#file')[0].files, function(i, file) {
+					data.append('file', file);
+				});
+				sendData = data;
+			} else {
+				httpCode = httpCodeVal;
+				sendDataType = "application/" + $("[name=send-data-type]:radio:checked").val();+"; charset=UTF-8";
+				processData = true;
+				sendData = $("#send-data").val();
+			}
+			
 			var resourceUrl = $("#resource-url").val();
-			var sendData = $("#send-data").val();
-			var sendDataType = "application/" + $("[name=send-data-type]:radio:checked").val()+"; charset=UTF-8";
 			var receiveDataType = $("[name=receive-data-type]:radio:checked").val();
-			sendRequest(httpCode, resourceUrl, sendData, sendDataType, receiveDataType);
+			
+			sendRequest(httpCode, resourceUrl, sendData, sendDataType, receiveDataType, processData);
 			event.preventDefault();
 		});
 		

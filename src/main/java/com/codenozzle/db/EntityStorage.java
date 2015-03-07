@@ -1,5 +1,6 @@
 package com.codenozzle.db;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ public abstract class EntityStorage<T extends Entity> {
 	public T store(final T entity) {
     	if (entity.getId() == null) {
     		entity.setId(counter.addAndGet(1));
+    		entity.setCreated(LocalDateTime.now());
     	}
     	storage.put(entity.getId(), entity);
         return entity;
@@ -67,6 +69,10 @@ public abstract class EntityStorage<T extends Entity> {
 
 	public int size() {
 		return storage.size();
+	}
+	
+	public boolean exists(Integer id) {
+		return storage.containsKey(id);
 	}
 	
 	public abstract T merge(T current, T updates);
