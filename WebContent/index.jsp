@@ -43,6 +43,15 @@
 			<small>Images</small>
 		</div>
 	</div>
+	<div class="col-lg-3 col-md-3">
+		<div class="box_stat box_ico">
+			<a href="#">
+				<span class="stat_ico stat_ico_1"><i class="icon-ellipsis-vertical"></i></span>
+			</a>
+			<h4 id="order-status-count"></h4>
+			<small>Order Statuses</small>
+		</div>
+	</div>
 </div>
 
 <%@include file="/WEB-INF/jspf/footer-begin.jspf" %>
@@ -63,6 +72,10 @@ $(document).ready(function() {
 	
 	$.get("/restlr/api/image/count/", function(data) {
 		$("#image-count").text(data);
+	});
+	
+	$.get("/restlr/api/orderstatus/count/", function(data) {
+		$("#order-status-count").text(data);
 	});
 });
 </script>

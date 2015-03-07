@@ -1,9 +1,8 @@
 package com.codenozzle.app;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -91,18 +90,14 @@ public class Randomizer {
 	private static void loadSampleOrders() {
 		List<Order> orderList = new ArrayList<Order>();
 		for (int i = 0; i < 20; i++) {
-			orderList.add(new Order(getRandomUser(), getRandomAddress(), getRandomAddress(), getRandomOrderStatus(), getNow(), true));
+			orderList.add(new Order(getRandomUser(), getRandomAddress(), getRandomAddress(), getRandomOrderStatus(), LocalDateTime.now(), true));
 		}
 		
 		AppStorage.ORDER.storeAll(orderList);
 	}
 
 	private static OrderStatus getRandomOrderStatus() {
-		return OrderStatus.values()[randInt(1, OrderStatus.values().length)];
-	}
-
-	private static Timestamp getNow() {
-		return new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
+		return OrderStatus.getAll().get(randInt(1, OrderStatus.getAll().size()));
 	}
 
 	private static Address getRandomAddress() {

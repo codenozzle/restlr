@@ -1,16 +1,21 @@
 package com.codenozzle.model;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public enum OrderStatus {
+public class OrderStatus {
 
-	DRAFT (1, "Draft"),
-	IN_PROGRESS (2, "In Progress"),
-	SHIPPED (3, "Shipped"),
-	DELIVERED (4, "Delivered"),
-	COMPLETE (5, "Complete"),
-	ERROR (6, "Error");
+	public static OrderStatus DRAFT = new OrderStatus(1, "Draft");
+	public static OrderStatus IN_PROGRESS = new OrderStatus(2, "In Progress");
+	public static OrderStatus SHIPPED = new OrderStatus(3, "Shipped");
+	public static OrderStatus DELIVERED = new OrderStatus(4, "Delivered");
+	public static OrderStatus COMPLETE = new OrderStatus(5, "Complete");
+	public static OrderStatus ERROR = new OrderStatus(6, "Error");
+	
+	public static List<OrderStatus> orderStatuses = Arrays.asList(DRAFT, IN_PROGRESS, SHIPPED, DELIVERED, COMPLETE, ERROR);
 	
 	private int id;
 	private String title;
@@ -39,4 +44,17 @@ public enum OrderStatus {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public static List<OrderStatus> getAll() {
+		return orderStatuses;
+	}
+
+	public static OrderStatus get(Integer id) {
+		return orderStatuses.get(id);
+	}
+
+	public static Integer size() {
+		return orderStatuses.size();
+	}
+	
 }

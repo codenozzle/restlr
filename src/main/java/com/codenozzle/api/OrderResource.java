@@ -9,7 +9,7 @@ import com.codenozzle.db.AppStorage;
 import com.codenozzle.db.OrderStorage;
 import com.codenozzle.model.Order;
 
-@Path("order")
+@Path("/order")
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN})
 public class OrderResource extends EntityResource<Order> {

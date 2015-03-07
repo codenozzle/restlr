@@ -1,6 +1,6 @@
 package com.codenozzle.model;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -13,9 +13,8 @@ public class Order extends Entity {
 	private Integer shippingAddressId;
 	private Integer billingAddressId;
 	private OrderStatus orderStatus;
-	private Timestamp dateOrdered;
+	private LocalDateTime dateOrdered;
 	private boolean active;
-	
 	private User user;
 	private Address shippingAddress;
 	private Address billingAddress;
@@ -24,7 +23,7 @@ public class Order extends Entity {
 		
 	}
 	
-	public Order(User user, Address shippingAddress, Address billingAddress, OrderStatus orderStatus, Timestamp dateOrdered, boolean active) {
+	public Order(User user, Address shippingAddress, Address billingAddress, OrderStatus orderStatus, LocalDateTime dateOrdered, boolean active) {
 		this.user = user;
 		this.shippingAddress = shippingAddress;
 		this.billingAddress = billingAddress; 
@@ -71,11 +70,11 @@ public class Order extends Entity {
 		this.orderStatus = orderStatus;
 	}
 
-	public Timestamp getDateOrdered() {
+	public LocalDateTime getDateOrdered() {
 		return dateOrdered;
 	}
 
-	public void setDateOrdered(Timestamp dateOrdered) {
+	public void setDateOrdered(LocalDateTime dateOrdered) {
 		this.dateOrdered = dateOrdered;
 	}
 
