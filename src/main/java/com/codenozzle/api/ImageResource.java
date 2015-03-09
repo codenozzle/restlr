@@ -1,5 +1,6 @@
 package com.codenozzle.api;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
@@ -17,13 +18,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import com.codenozzle.db.AppStorage;
 import com.codenozzle.db.FileDataStorage;
 import com.codenozzle.model.FileData;
+import com.codenozzle.utils.FileUtils;
 
 @Path("/image")
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -51,24 +52,33 @@ public class ImageResource {
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public FileData create(
-		@FormDataParam("file") InputStream fileInputStream,
+		@FormDataParam("file") InputStream inputStream,
 		@FormDataParam("file") FormDataContentDisposition contentDispositionHeader) {
 		
 		FileData entity = null;
 		try {
-			byte[] fileInBytes = IOUtils.toByteArray(fileInputStream);
+			String fileType = FileUtils.getFileType(contentDispositionHeader.getFileName());
+			BufferedImage fullImage = FileUtils.getBufferedImage(inputStream, fileType);
 			entity = new FileData();
 			entity.setName(contentDispositionHeader.getFileName());
-			entity.setType(getFileType(contentDispositionHeader.getFileName()));
-			entity.setByteArray(fileInBytes);
-			entity.setSize(Long.valueOf(fileInBytes.length));
+			entity.setType(fileType);
+			
+			byte[] imageInByte = FileUtils.getByteArray(fullImage, fileType);
+			entity.setImageData(imageInByte);
+			entity.setFileSize(imageInByte.length);
+			
+			byte[] thumbnailInByte = FileUtils.getThumbnailAsByteArray(fullImage, fileType);
+			entity.setThumbnailData(thumbnailInByte);
+			entity.setThumbnailFileSize(thumbnailInByte.length);
+			
 			getStorage().store(entity);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		
 		return entity;
 	}
+	
+	
 	
 	@DELETE
     @Path("{id: \\d+}")
@@ -102,6 +112,13 @@ public class ImageResource {
 		return getFileData(id);
 	}
 	
+	@GET
+	@Path("{id: \\d+}/thumbnail")
+	@Produces("image/*")
+	public Response viewThumbnail(@PathParam("id") Integer id) {
+		return getThumbnailData(id);
+	}
+	
 	private Response getFileData(Integer id) {
 		if (!getStorage().exists(id)) {
 			throw new WebApplicationException(404);
@@ -110,13 +127,22 @@ public class ImageResource {
 		FileData fileData = getStorage().get(id);
 
 		return Response
-            .ok(fileData.getByteArray())
+            .ok(fileData.getImageData())
             .header("Content-Disposition","filename = " + fileData.getName())
             .build();
 	}
 	
-	private String getFileType(String fileName) {
-		return fileName.substring(fileName.indexOf(".")+1);
+	private Response getThumbnailData(Integer id) {
+		if (!getStorage().exists(id)) {
+			throw new WebApplicationException(404);
+		}
+		
+		FileData fileData = getStorage().get(id);
+
+		return Response
+            .ok(fileData.getThumbnailData())
+            .header("Content-Disposition","filename = " + fileData.getName())
+            .build();
 	}
 
 }

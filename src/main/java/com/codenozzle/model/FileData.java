@@ -9,9 +9,11 @@ public class FileData extends Entity {
 	private static final long serialVersionUID = 7170649188425673798L;
 	
 	private byte[] imageInBytes;
+	private byte[] thumbnailInByte;
 	private String fileName;
 	private String type;
-	private long size;
+	private Integer fileSize;
+	private Integer thumbnailFileSize;
 
 	public FileData() {
 		
@@ -33,21 +35,38 @@ public class FileData extends Entity {
 		this.type = type;
 	}
 	
-	public Long getSize() {
-		return this.size;
+	public Integer getFileSize() {
+		return this.fileSize;
 	}
 	
-	public void setSize(Long size) {
-		this.size = size;
+	public void setFileSize(Integer fileSize) {
+		this.fileSize = fileSize;
 	}
 
-	public void setByteArray(byte[] imageInBytes) {
+	public void setImageData(byte[] imageInBytes) {
 		this.imageInBytes = imageInBytes;
 	}
 	
 	@XmlTransient
-	public byte[] getByteArray() {
+	public byte[] getImageData() {
 		return imageInBytes;
+	}
+
+	public void setThumbnailData(byte[] thumbnailInByte) {
+		this.thumbnailInByte = thumbnailInByte;
+	}
+	
+	@XmlTransient
+	public byte[] getThumbnailData() {
+		return thumbnailInByte;
+	}
+
+	public void setThumbnailFileSize(Integer thumbnailFileSize) {
+		this.thumbnailFileSize = thumbnailFileSize;
+	}
+	
+	public Integer getThumbnailFileSize() {
+		return this.thumbnailFileSize;
 	}
 
 }

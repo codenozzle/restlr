@@ -3,6 +3,7 @@ package com.codenozzle.app;
 import javax.ws.rs.ApplicationPath;
 
 import org.glassfish.jersey.filter.LoggingFilter;
+import org.glassfish.jersey.linking.DeclarativeLinkingFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
@@ -18,6 +19,9 @@ public class RestApp extends ResourceConfig {
         
         // Turn on multipart file support
         register(MultiPartFeature.class);
+        
+        // Turn on Declarative Linking
+        register(DeclarativeLinkingFeature.class);
         
         // Trace everything
         property(ServerProperties.TRACING, "ALL");
