@@ -23,6 +23,14 @@ var UI = (function () {
 			});
 		}
 		
+		function createTable2(dataSet, columnMap, columnDefs, tableSelector) {
+			oTable = $(tableSelector).dataTable({
+				aaData: dataSet,
+		        aoColumns: columnMap,
+				aoColumnDefs: columnDefs
+			});
+		}
+		
 		function refreshResults() {
 			oTable.fnClearTable();
 			oTable.fnReloadAjax();
@@ -147,6 +155,7 @@ var UI = (function () {
 		
 	    return {
 	    	createTable: createTable,
+	    	createTable2: createTable2,
 	    	showEdit: showEdit
     	};
 	};

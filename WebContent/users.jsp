@@ -10,7 +10,7 @@
 		<button type="button" class="btn btn-default btn-lg" id="create-new-button">Create New User</button>
 	</div>
 	<div class="col-sm-3">
-		<button type="button" class="btn btn-default btn-lg" id="refresh-button">Refresh</button>
+		<button type="button" class="btn btn-default btn-lg" id="refresh-button"><i class="icon-refresh"></i></button>
 	</div>
 </div>
 					

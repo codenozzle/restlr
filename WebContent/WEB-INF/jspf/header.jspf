@@ -53,6 +53,12 @@
 								<span class="menu_label">Dashboard</span>
 							</a>
 						</li>
+						<li<%= (pageName == "orders") ? " class=\"active\"" : "" %>>             
+							<a href="orders.jsp">
+								<i class="icon-shopping-cart icon-2x"></i>
+								<span class="menu_label">Orders</span>
+							</a>
+						</li>
 						<li<%= (pageName == "products") ? " class=\"active\"" : "" %>>             
 							<a href="products.jsp">
 								<i class="icon-edit icon-2x"></i>

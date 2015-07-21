@@ -16,7 +16,7 @@
 	</div>
 	<div class="col-lg-3 col-md-3">
 		<div class="box_stat box_ico">
-			<a href="#">
+			<a href="orders.jsp">
 				<span class="stat_ico stat_ico_1"><i class="icon-tags"></i></span>
 			</a>
 			<h4 id="order-count"></h4>
