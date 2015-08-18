@@ -14,7 +14,7 @@ import com.codenozzle.core.Randomizer;
 public class App extends ResourceConfig {
     public App() {
         // Register resources and providers using package-scanning
-        packages("com.codenozzle.api");
+    	packages("com.codenozzle.api");
         
         // Turn on logging
         register(LoggingFilter.class);

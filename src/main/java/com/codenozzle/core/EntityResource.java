@@ -13,15 +13,25 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
+import com.wordnik.swagger.annotations.ApiOperation;
+
 public abstract class EntityResource<T extends Entity> {
 
 	@GET
+	@ApiOperation(httpMethod = "GET", 
+		value = "Returns all resources", 
+		notes = "Returns all resources", 
+		response = Entity.class)
     public Collection<T> getAll() {
         return getStorage().getAllAsList();
     }
 	
 	@GET
     @Path("{id: \\d+}")
+	@ApiOperation(httpMethod = "GET", 
+		value = "Returns a single resource", 
+		notes = "Returns a single resource", 
+		response = Entity.class)
     public T get(@PathParam("id") Integer id) {
         return getStorage().get(id);
     }

@@ -17,8 +17,10 @@ import jersey.repackaged.com.google.common.collect.Maps;
 
 import com.codenozzle.core.AppStorage;
 import com.codenozzle.core.EntityResource;
+import com.wordnik.swagger.annotations.Api;
 
 @Path("user")
+@Api(value = "user", description = "User operations")
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN})
 public class UserResource extends EntityResource<User> {

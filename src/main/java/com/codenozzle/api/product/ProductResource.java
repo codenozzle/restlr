@@ -18,8 +18,10 @@ import jersey.repackaged.com.google.common.collect.Maps;
 
 import com.codenozzle.core.AppStorage;
 import com.codenozzle.core.EntityResource;
+import com.wordnik.swagger.annotations.Api;
 
 @Path("product")
+@Api(value = "product", description = "Product operations")
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN})
 public class ProductResource extends EntityResource<Product> {

@@ -12,23 +12,33 @@
             <param-value>com.codenozzle.api.App</param-value>
         </init-param>
  
-        <!-- Register resources and providers under com.codenozzle.api -->
-        <init-param>
+ 		<init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>com.codenozzle.api</param-value>
+            <param-value>
+                com.wordnik.swagger.jaxrs.json,
+                com.codenozzle.api
+            </param-value>
         </init-param>
- 
-        <!-- Enable Tracing support. -->
         <init-param>
-            <param-name>jersey.config.server.tracing</param-name>
-            <param-value>ALL</param-value>
+            <param-name>jersey.config.server.provider.classnames</param-name>
+            <param-value>
+                com.wordnik.swagger.jersey.listing.ApiListingResourceJSON,
+                com.wordnik.swagger.jersey.listing.JerseyApiDeclarationProvider,
+                com.wordnik.swagger.jersey.listing.JerseyResourceListingProvider
+            </param-value>
         </init-param>
- 
+        
         <load-on-startup>1</load-on-startup>
     </servlet>
- 
+  
     <servlet-mapping>
         <servlet-name>com.codenozzle.api.App</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+	    <servlet-name>Bootstrap</servlet-name>
+	    <servlet-class>com.codenozzle.api.Bootstrap</servlet-class>
+	    <load-on-startup>2</load-on-startup>
+  	</servlet>
 </web-app>
