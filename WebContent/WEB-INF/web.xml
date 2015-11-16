@@ -5,29 +5,17 @@
 	<servlet>
         <servlet-name>com.codenozzle.api.App</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
- 
-        <!-- Register JAX-RS Application, if needed. -->
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
             <param-value>com.codenozzle.api.App</param-value>
         </init-param>
- 
  		<init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
             <param-value>
-                com.wordnik.swagger.jaxrs.json,
+                io.swagger.jaxrs.listing,
                 com.codenozzle.api
             </param-value>
         </init-param>
-        <init-param>
-            <param-name>jersey.config.server.provider.classnames</param-name>
-            <param-value>
-                com.wordnik.swagger.jersey.listing.ApiListingResourceJSON,
-                com.wordnik.swagger.jersey.listing.JerseyApiDeclarationProvider,
-                com.wordnik.swagger.jersey.listing.JerseyResourceListingProvider
-            </param-value>
-        </init-param>
-        
         <load-on-startup>1</load-on-startup>
     </servlet>
   

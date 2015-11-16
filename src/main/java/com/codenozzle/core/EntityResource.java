@@ -10,10 +10,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.wordnik.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiOperation;
 
 public abstract class EntityResource<T extends Entity> {
 
@@ -65,6 +67,7 @@ public abstract class EntityResource<T extends Entity> {
     
     @GET
     @Path("/count")
+    @Produces({ MediaType.TEXT_PLAIN })
     public Integer count() {
         return getStorage().size();
     }

@@ -18,12 +18,12 @@ import jersey.repackaged.com.google.common.collect.Maps;
 
 import com.codenozzle.core.AppStorage;
 import com.codenozzle.core.EntityResource;
-import com.wordnik.swagger.annotations.Api;
+import io.swagger.annotations.Api;
 
 @Path("product")
-@Api(value = "product", description = "Product operations")
-@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN})
+@Api(value = "product", tags = {"Products"})
+@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 public class ProductResource extends EntityResource<Product> {
     
 	@Override

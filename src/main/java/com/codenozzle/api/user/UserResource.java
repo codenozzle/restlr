@@ -17,7 +17,7 @@ import jersey.repackaged.com.google.common.collect.Maps;
 
 import com.codenozzle.core.AppStorage;
 import com.codenozzle.core.EntityResource;
-import com.wordnik.swagger.annotations.Api;
+import io.swagger.annotations.Api;
 
 @Path("user")
 @Api(value = "user", description = "User operations")
