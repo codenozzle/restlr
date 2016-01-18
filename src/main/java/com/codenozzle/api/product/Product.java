@@ -1,5 +1,8 @@
 package com.codenozzle.api.product;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -8,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.codenozzle.core.Entity;
 
 @XmlRootElement
+@ApiModel(value="DifferentModel", description="Sample model for the documentation")
 public class Product extends Entity {
 
 	private static final long serialVersionUID = -8200503315550831684L;
@@ -32,6 +36,7 @@ public class Product extends Entity {
 		this.createdOn = LocalDateTime.now();
 	}
 	
+	@ApiModelProperty(value = "Product SKU", required = true)
 	public String getProductSku() {
 		return productSku;
 	}
@@ -40,6 +45,7 @@ public class Product extends Entity {
 		this.productSku = productSku;
 	}
 
+	@ApiModelProperty(value = "Product name", required = true)
 	public String getProductName() {
 		return productName;
 	}
@@ -48,6 +54,7 @@ public class Product extends Entity {
 		this.productName = productName;
 	}
 
+	@ApiModelProperty(value = "Product description", required = true)
 	public String getDescription() {
 		return description;
 	}
@@ -56,6 +63,7 @@ public class Product extends Entity {
 		this.description = description;
 	}
 
+	@ApiModelProperty(value = "Product price", required = true)
 	public BigDecimal getPrice() {
 		return price;
 	}
@@ -64,6 +72,7 @@ public class Product extends Entity {
 		this.price = price;
 	}
 
+	@ApiModelProperty(value = "Product active status", required = true)
 	public Boolean isActive() {
 		return active;
 	}
@@ -72,12 +81,13 @@ public class Product extends Entity {
 		this.active = active;
 	}
 	
-	public void setCreated(LocalDateTime createdOn) {
-		this.createdOn = createdOn;
-	}
-	
+	@ApiModelProperty(value = "Date created", readOnly = true)
 	public LocalDateTime getCreated() {
 		return this.createdOn;
+	}
+	
+	public void setCreated(LocalDateTime createdOn) {
+		this.createdOn = createdOn;
 	}
 
 }

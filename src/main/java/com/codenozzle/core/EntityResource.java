@@ -19,59 +19,13 @@ import io.swagger.annotations.ApiOperation;
 
 public abstract class EntityResource<T extends Entity> {
 
-	@GET
-	@ApiOperation(httpMethod = "GET", 
-		value = "Returns all resources", 
-		notes = "Returns all resources", 
-		response = Entity.class)
-    public Collection<T> getAll() {
-        return getStorage().getAllAsList();
-    }
+	// HTTP Status Codes
+	protected static final String HTTP_GET = "GET";
+	protected static final String HTTP_POST = "POST";
+	protected static final String HTTP_PUT = "PUT";
+	protected static final String HTTP_PATCH = "PATCH";
+	protected static final String HTTP_DELETE = "DELETE";
 	
-	@GET
-    @Path("{id: \\d+}")
-	@ApiOperation(httpMethod = "GET", 
-		value = "Returns a single resource", 
-		notes = "Returns a single resource", 
-		response = Entity.class)
-    public T get(@PathParam("id") Integer id) {
-        return getStorage().get(id);
-    }
-
-	@POST
-    public T create(T entity /*, @Context HttpServletResponse servletResponse*/) throws IOException {
-    	return storeAndReturn(entity);
-    }
-	
-	@PUT
-    @Path("{id: \\d+}")
-    public T update(
-    	@PathParam("id") Integer id,
-    	T updates, 
-    	@Context HttpServletResponse servletResponse) throws IOException {
-
-    	return update(id, updates);
-    }
-
-	@DELETE
-    @Path("{id: \\d+}")
-    public T remove(@PathParam("id") Integer id) {
-        return getStorage().remove(id);
-    }
-
-    @DELETE
-    public Response removeAll() {
-    	getStorage().removeAll();
-    	return Response.ok().build();
-    }
-    
-    @GET
-    @Path("/count")
-    @Produces({ MediaType.TEXT_PLAIN })
-    public Integer count() {
-        return getStorage().size();
-    }
-
 	protected abstract EntityStorage<T> getStorage();
 	
 	protected T storeAndReturn(T entity /*, HttpServletResponse servletResponse*/) throws IOException {

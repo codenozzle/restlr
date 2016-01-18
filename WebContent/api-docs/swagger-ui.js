@@ -3732,7 +3732,8 @@ var SwaggerHttp = require('../http');
 
 var Operation = module.exports = function (parent, scheme, operationId, httpMethod, path, args, definitions, models, clientAuthorizations) {
   var errors = [];
-
+  var order = { 'application/json': '0', 'application/xml': '1', 'text/plain': '2' };
+  
   parent = parent || {};
   args = args || {};
 
@@ -3745,6 +3746,8 @@ var Operation = module.exports = function (parent, scheme, operationId, httpMeth
   this.clientAuthorizations = clientAuthorizations;
   this.consumes = args.consumes || parent.consumes || ['application/json'];
   this.produces = args.produces || parent.produces || ['application/json'];
+  this.produces.sort(function(a, b) { return order[a].localeCompare(order[b]); });
+  this.consumes.sort(function(a, b) { return order[a].localeCompare(order[b]); });
   this.deprecated = args.deprecated;
   this.description = args.description;
   this.host = parent.host || 'localhost';

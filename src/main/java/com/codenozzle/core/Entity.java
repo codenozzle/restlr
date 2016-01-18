@@ -1,5 +1,7 @@
 package com.codenozzle.core;
 
+import io.swagger.annotations.ApiModelProperty;
+
 
 public abstract class Entity implements java.io.Serializable {
 
@@ -7,6 +9,7 @@ public abstract class Entity implements java.io.Serializable {
 	
 	private Integer id;
 	
+	@ApiModelProperty(value = "Product name", readOnly = true)
 	public Integer getId() {
 		return id;
 	}

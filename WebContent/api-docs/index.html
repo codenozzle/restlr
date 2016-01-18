@@ -68,9 +68,13 @@
         onFailure: function(data) {
           log("Unable to Load SwaggerUI");
         },
-        docExpansion: "none",
-        apisSorter: "alpha",
-        showRequestHeaders: false
+        docExpansion: "list",
+        apisSorter: "alpha", // can also be a function
+        operationsSorter: function (a, b) { 
+          var order = { 'get': '0', 'post': '1', 'put': '2', 'patch': '3', 'delete': '4' }; 
+          return order[a.method].localeCompare(order[b.method]);    
+        },
+        showRequestHeaders: true
       });
 
       function addApiKeyAuthorization(){
